@@ -5,6 +5,7 @@ public class ProceduralDesertGeneration : Component
 {
 	public int chunkDimension = 16;
 	public int resolution = 2;
+	public ModelBuilder model = new ModelBuilder();
 
 	protected override void OnStart()
 	{
@@ -15,6 +16,7 @@ public class ProceduralDesertGeneration : Component
 	public void GenerateDesert()
 	{
 		List<Vertex> vertices = new List<Vertex>();
+		Log.Info( "Hit");
 		//Vertex[] vertices = new Vertex[resolution * resolution];
 
 		var quadObject = new GameObject();
@@ -68,7 +70,7 @@ public class ProceduralDesertGeneration : Component
 		}
 
 		// Create the mesh with explicit types
-		var material = Material.Load( "materials/debug/debug_grid.vmat" );
+		var material = Material.Load( "materials/hotpink.vmat" );
 		var mesh = new Mesh( material, MeshPrimitiveType.Triangles );
 
 		mesh.CreateVertexBuffer( vertices.Count, Vertex.Layout, vertices );

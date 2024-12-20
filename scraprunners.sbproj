@@ -6,7 +6,9 @@
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": null,
-  "PackageReferences": [],
+  "PackageReferences": [
+    "facepunch.libsdf"
+  ],
   "EditorReferences": null,
   "IsWhitelistDisabled": false,
   "Metadata": {

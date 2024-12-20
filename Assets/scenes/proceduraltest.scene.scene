@@ -9,7 +9,12 @@
       "Components": [
         {
           "__type": "ProceduralDesertGeneration",
-          "__guid": "268ca857-0439-40d4-83a2-cf2b5bec53da"
+          "__guid": "268ca857-0439-40d4-83a2-cf2b5bec53da",
+          "__enabled": false
+        },
+        {
+          "__type": "ProceduralQuadGenerator",
+          "__guid": "df83a6d4-4e4e-4aa0-afab-ca5651661e63"
         }
       ]
     },
@@ -74,6 +79,35 @@
           "SkyIndirectLighting": true,
           "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
           "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "41e82a8d-37d4-4a5e-ac08-6f3f18b12b2a",
+      "Flags": 0,
+      "Name": "Cube",
+      "Position": "0,0,-111.1414",
+      "Rotation": "0.3659528,0.221748,-0.04552991,0.9026812",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "c73c37f8-a9f4-481c-be0f-73ba903c7ae6",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "ProceduralQuadGenerator",
+          "__guid": "78a29b52-1706-4f17-9a7d-5b2d2a8e946b"
         }
       ]
     }
