@@ -1,0 +1,63 @@
+{
+  "RootObject": {
+    "__guid": "844b2507-1916-43ee-90d7-c6da1fab5e86",
+    "Flags": 0,
+    "Name": "Truck",
+    "Position": "161.3214,-14.7523,5.185944",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "0c4abe1f-5388-4597-a2c7-0ed3f1c7f3f2",
+        "BodyGroups": 18446744073709551615,
+        "CreateAttachments": false,
+        "Model": "models/blockout/truck/truck_base.vmdl",
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "e2b5c994-b1b2-432c-bd7f-f354d03b224d",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "X": false,
+          "Y": false,
+          "Z": false,
+          "Pitch": false,
+          "Yaw": false,
+          "Roll": false
+        },
+        "MassCenterOverride": "0,0,0",
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "OverrideMassCenter": false,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "e22843d1-ca2e-45f9-a725-62e39a2d40c7",
+        "Center": "0,107.6999,42.70001",
+        "IsTrigger": false,
+        "Scale": "64.79999,231.9,95.80002",
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
