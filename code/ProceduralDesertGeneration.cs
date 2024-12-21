@@ -5,7 +5,10 @@ public class ProceduralDesertGeneration : Component
 {
 	public int chunkDimension = 16;
 	public int resolution = 10;
+	//public SceneObject quad;
+	public GameObject quad = new GameObject();
 	public ModelBuilder model = new ModelBuilder();
+	public SceneWorld world = new SceneWorld();
 
 	protected override void OnStart()
 	{
@@ -17,9 +20,6 @@ public class ProceduralDesertGeneration : Component
 	{
 		List<Vertex> vertices = new List<Vertex>();
 		//Vertex[] vertices = new Vertex[resolution * resolution];
-
-		var quadObject = new GameObject();
-		var meshComponent = quadObject.AddComponent<MeshComponent>();
 
 		Vector3 position = new Vector3( 0f, 0f, 0f );
 		Vector3 normal = new Vector3( 0f, 0f, 1f );
@@ -66,20 +66,17 @@ public class ProceduralDesertGeneration : Component
 				indices.Add( baseVertexIndex + 2 );
 				indices.Add( baseVertexIndex + 3 );
 			}
-			Log.Info( "Hit2" );
 		}
 
 		var material = Material.Load( "materials/hotpink.vmat" );
 		var mesh = new Mesh( material, MeshPrimitiveType.Triangles );
 
-		mesh.CreateVertexBuffer( vertices.Count, Vertex.Layout, vertices );
+		mesh.CreateVertexBuffer<Vertex>( vertices.Count, Vertex.Layout, vertices.ToArray() );
 		mesh.CreateIndexBuffer(indices.Count, indices.ToArray() );
+		mesh.Bounds = BBox.FromPositionAndSize( Vector3.Zero, 100f );
 
 		Model model = Model.Builder.AddMesh( mesh ) .Create();
-		quadObject.Name = "Quad";
-		quadObject.AddComponent<ModelRenderer>();
-		//quadObject.GetComponent<ModelRenderer>().MaterialOverride = material;
-
-		quadObject.WorldPosition = Vector3.Zero;
+		quad.AddComponent<ModelRenderer>().Model = model;
+		quad.Name = "Quad";
 	}
 }

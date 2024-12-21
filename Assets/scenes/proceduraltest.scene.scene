@@ -85,7 +85,6 @@
       "__guid": "3e5f507c-eccf-4635-83ab-02335d4cba09",
       "Flags": 0,
       "Name": "Cube",
-      "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.ModelRenderer",
