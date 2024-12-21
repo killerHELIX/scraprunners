@@ -4,7 +4,7 @@ using Sandbox;
 public class ProceduralDesertGeneration : Component
 {
 	public int chunkDimension = 16;
-	public int resolution = 2;
+	public int resolution = 10;
 	public ModelBuilder model = new ModelBuilder();
 
 	protected override void OnStart()
@@ -16,7 +16,6 @@ public class ProceduralDesertGeneration : Component
 	public void GenerateDesert()
 	{
 		List<Vertex> vertices = new List<Vertex>();
-		Log.Info( "Hit");
 		//Vertex[] vertices = new Vertex[resolution * resolution];
 
 		var quadObject = new GameObject();
@@ -67,20 +66,19 @@ public class ProceduralDesertGeneration : Component
 				indices.Add( baseVertexIndex + 2 );
 				indices.Add( baseVertexIndex + 3 );
 			}
+			Log.Info( "Hit2" );
 		}
 
-		// Create the mesh with explicit types
 		var material = Material.Load( "materials/hotpink.vmat" );
 		var mesh = new Mesh( material, MeshPrimitiveType.Triangles );
 
 		mesh.CreateVertexBuffer( vertices.Count, Vertex.Layout, vertices );
 		mesh.CreateIndexBuffer(indices.Count, indices.ToArray() );
 
-		Model model = Model.Builder
-			.AddMesh( mesh )
-			.Create();
-
-		//meshComponent.Model = model;
+		Model model = Model.Builder.AddMesh( mesh ) .Create();
+		quadObject.Name = "Quad";
+		quadObject.AddComponent<ModelRenderer>();
+		//quadObject.GetComponent<ModelRenderer>().MaterialOverride = material;
 
 		quadObject.WorldPosition = Vector3.Zero;
 	}

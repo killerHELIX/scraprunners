@@ -30,6 +30,7 @@ public sealed class ProceduralQuadGenerator : Component
 	private void Rotate()
 	{
 		go = this.GameObject;
-
+		go.LocalRotation *= Rotation.FromYaw( 0.5f );
+		go.LocalRotation *= Rotation.FromRoll( 0.5f );
 	}
 }

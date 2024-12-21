@@ -9,12 +9,7 @@
       "Components": [
         {
           "__type": "ProceduralDesertGeneration",
-          "__guid": "268ca857-0439-40d4-83a2-cf2b5bec53da",
-          "__enabled": false
-        },
-        {
-          "__type": "ProceduralQuadGenerator",
-          "__guid": "df83a6d4-4e4e-4aa0-afab-ca5651661e63"
+          "__guid": "268ca857-0439-40d4-83a2-cf2b5bec53da"
         }
       ]
     },
@@ -22,8 +17,8 @@
       "__guid": "b4b0806f-3486-4695-a3e9-3b29cec79a66",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "0,0,70.59264",
-      "Rotation": "-0.001851198,0.7071044,0.001851198,0.7071044",
+      "Position": "0,0,59.56342",
+      "Rotation": "0,0.7071066,0,0.7071069",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -43,6 +38,10 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        },
+        {
+          "__type": "CameraRotate",
+          "__guid": "99de4df0-78eb-4a4b-8e58-70c7893451e5"
         }
       ]
     },
@@ -83,18 +82,17 @@
       ]
     },
     {
-      "__guid": "41e82a8d-37d4-4a5e-ac08-6f3f18b12b2a",
+      "__guid": "3e5f507c-eccf-4635-83ab-02335d4cba09",
       "Flags": 0,
       "Name": "Cube",
-      "Position": "0,0,-111.1414",
-      "Rotation": "0.3659528,0.221748,-0.04552991,0.9026812",
       "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.ModelRenderer",
-          "__guid": "c73c37f8-a9f4-481c-be0f-73ba903c7ae6",
+          "__guid": "5b9a3a8b-9b1b-4443-bc12-7a9f244c33d4",
           "BodyGroups": 18446744073709551615,
           "CreateAttachments": false,
+          "MaterialOverride": "materials/hotpink.vmat",
           "Model": "models/dev/box.vmdl",
           "RenderOptions": {
             "GameLayer": true,
@@ -107,7 +105,7 @@
         },
         {
           "__type": "ProceduralQuadGenerator",
-          "__guid": "78a29b52-1706-4f17-9a7d-5b2d2a8e946b"
+          "__guid": "b805f4a5-feaa-489a-99bd-d7e0c1943506"
         }
       ]
     }
