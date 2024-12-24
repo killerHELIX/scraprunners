@@ -10,6 +10,12 @@
         {
           "__type": "ProceduralDesertGeneration",
           "__guid": "268ca857-0439-40d4-83a2-cf2b5bec53da"
+        },
+        {
+          "__type": "ProceduralQuadGenerator",
+          "__guid": "f0138054-299f-44b0-8629-bcd230a1160f",
+          "__enabled": false,
+          "PlaneSize": 100
         }
       ]
     },
@@ -101,10 +107,6 @@
           },
           "RenderType": "On",
           "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "ProceduralQuadGenerator",
-          "__guid": "b805f4a5-feaa-489a-99bd-d7e0c1943506"
         }
       ]
     }

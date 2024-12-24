@@ -4,7 +4,7 @@ using System;
 public sealed class CameraRotate : Component
 {
 	public float speed = 0.5f;
-	public float amplitude = 1000f;
+	public float amplitude = 500f;
 	public Vector3 origin = new Vector3( 0f, 0f, 0f );
 	protected override void OnUpdate()
 	{

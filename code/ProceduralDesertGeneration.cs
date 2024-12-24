@@ -1,44 +1,35 @@
 using Sandbox;
-
-[Library( "example_terrain_quad" )]
 public class ProceduralDesertGeneration : Component
 {
-	public int chunkDimension = 16;
-	public int resolution = 10;
-	//public SceneObject quad;
-	public GameObject quad = new GameObject();
-	public ModelBuilder model = new ModelBuilder();
-	public SceneWorld world = new SceneWorld();
+	public int resolution = 100;
+	private Model model { get; set; }
 
 	protected override void OnStart()
 	{
 		base.OnStart();
-		GenerateDesert();
+		model = GenerateDesert();
+		this.AddComponent<ModelRenderer>().Model = model;
 	}
 
-	public void GenerateDesert()
+	public Model GenerateDesert()
 	{
 		List<Vertex> vertices = new List<Vertex>();
-		//Vertex[] vertices = new Vertex[resolution * resolution];
-
-		Vector3 position = new Vector3( 0f, 0f, 0f );
-		Vector3 normal = new Vector3( 0f, 0f, 1f );
-		Vector3 tangent = new Vector3( 0f, 0f, 0f );
-		Vector4 uv = new Vector4( 0f, 0f, 0f, 0f );
-
 		List<int> indices = new List<int>();
 
-		for (int x = 0; x < resolution; x++ )
-		{
-			for ( int y = 0; y < resolution; y++ )
-			{
-				float x0 = (float)x / resolution;
-				float y0 = (float)y / resolution;
-				float z0 = 0f;//(float)y / resolution;
+		Vector3 normal = Vector3.Up;
+		Vector3 tangent = Vector3.Forward;
 
-				float x1 = (float)(x + 1) / resolution;
-				float y1 = (float)(y + 1) / resolution;
-				float z1 = 0f;// (float)(y + 1) / resolution;
+
+		for (int x = -resolution; x < resolution; x++ )
+		{
+			for ( int y = -resolution; y < resolution; y++ )
+			{
+				float x0 = (float)x / 2f;
+				float y0 = (float)y / 2f;
+				float z0 = 0f;
+
+				float x1 = (float)(x + 1) / 2f;
+				float y1 = (float)(y + 1) / 2f;
 
 				//quad
 				Vector3 botLeft = new Vector3(x0, y0, z0);
@@ -47,10 +38,10 @@ public class ProceduralDesertGeneration : Component
 				Vector3 topLeft = new Vector3(x0, y1, z0);
 
 				// uv corners
-				Vector2 uvBotLeft = new Vector2(0f, 0f);
-				Vector2 uvBotRight = new Vector2(1f, 0f);
-				Vector2 uvTopRight = new Vector2( 1f, 1f );
-				Vector2 uvTopLeft = new Vector2(0f, 1f);
+				Vector4 uvBotLeft = new Vector4(0f, 0f, 0f, 0f);
+				Vector4 uvBotRight = new Vector4(2f, 0f, 0f, 0f );
+				Vector4 uvTopRight = new Vector4( 2f, 2f, 0f, 0f );
+				Vector4 uvTopLeft = new Vector4(0f, 2f, 0f, 0f );
 
 				int baseVertexIndex = vertices.Count;
 
@@ -67,16 +58,13 @@ public class ProceduralDesertGeneration : Component
 				indices.Add( baseVertexIndex + 3 );
 			}
 		}
-
 		var material = Material.Load( "materials/hotpink.vmat" );
-		var mesh = new Mesh( material, MeshPrimitiveType.Triangles );
+		var mesh = new Mesh( material );
 
 		mesh.CreateVertexBuffer<Vertex>( vertices.Count, Vertex.Layout, vertices.ToArray() );
 		mesh.CreateIndexBuffer(indices.Count, indices.ToArray() );
-		mesh.Bounds = BBox.FromPositionAndSize( Vector3.Zero, 100f );
+		mesh.Bounds = BBox.FromPositionAndSize( Vector3.Zero, resolution );
 
-		Model model = Model.Builder.AddMesh( mesh ) .Create();
-		quad.AddComponent<ModelRenderer>().Model = model;
-		quad.Name = "Quad";
+		return Model.Builder.AddMesh( mesh ) .Create();
 	}
 }

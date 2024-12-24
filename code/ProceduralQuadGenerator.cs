@@ -1,36 +1,37 @@
+using System.Runtime.InteropServices;
 using Sandbox;
-using Sandbox.Sdf;
 
 public sealed class ProceduralQuadGenerator : Component
 {
+	[Property] public float PlaneSize { get; set; } = 2.0f;
 
-	public GameObject go;
+	private Model _model { get; set; }
+
+	
+
 	protected override void OnStart()
 	{
 		base.OnStart();
-		GenerateQuad();
+
+		_model = CreatePlane();
+
+		this.AddComponent<ModelRenderer>().Model = _model;
 	}
 
-	protected override void OnUpdate()
+	private Model CreatePlane()
 	{
-		base.OnUpdate();
-		Rotate();
-	}
+		var material = Material.Load( "materials/hotpink.vmat" );
+		var mesh = new Mesh( material );
+		mesh.CreateVertexBuffer<Vertex>( 4, Vertex.Layout, new[]
+		{
+new Vertex( new Vector3( (-PlaneSize/2), (-PlaneSize/2), 0 ), Vector3.Up, Vector3.Forward, new Vector4( 0, 0, 0, 0 ) ),
+new Vertex( new Vector3( (PlaneSize/2), (-PlaneSize/2), 0 ), Vector3.Up, Vector3.Forward, new Vector4( 2, 0, 0, 0 ) ),
+new Vertex( new Vector3( (PlaneSize/2), (PlaneSize/2), 0 ), Vector3.Up, Vector3.Forward, new Vector4( 2, 2, 0, 0 ) ),
+new Vertex( new Vector3( (-PlaneSize/2), (PlaneSize/2), 0 ), Vector3.Up, Vector3.Forward, new Vector4( 0, 2, 0, 0 ) ),
+} );
+		mesh.CreateIndexBuffer( 6, new[] { 0, 1, 2, 2, 3, 0 } );
+		mesh.Bounds = BBox.FromPositionAndSize( 0, PlaneSize );
 
-	private void GenerateQuad()
-	{
-		var sdfWorld = new Sdf2DWorld();
-		var quad = new CircleSdf( new Vector2( 0f, 0f ), 2f );
-
-		var material = ResourceLibrary.Get<Sdf2DLayer>( "layers/sdf2d/checkerboard.sdflayer" );
-
-		sdfWorld.AddAsync( quad, material );
-	}
-
-	private void Rotate()
-	{
-		go = this.GameObject;
-		go.LocalRotation *= Rotation.FromYaw( 0.5f );
-		go.LocalRotation *= Rotation.FromRoll( 0.5f );
+		return Model.Builder.AddMesh( mesh ).Create();
 	}
 }
