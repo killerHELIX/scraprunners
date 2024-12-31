@@ -107,173 +107,85 @@
       ]
     },
     {
-      "__guid": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
+      "__guid": "f535deff-a1bf-49a2-b1c7-46ad2e05e381",
       "Flags": 0,
-      "Name": "Cube",
-      "Position": "21.41682,74.1244,14.40159",
-      "Rotation": "0.00000001819328,-0.00000000000000008235059,0.3052325,0.952278",
-      "Scale": "0.5632889,0.5632889,0.5632889",
+      "Name": "Camera",
+      "Position": "179.7914,-165.616,97.72534",
+      "Rotation": "0,0,0.7071067,0.7071068",
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "b9121ffa-617c-4ccc-a2aa-8acc98727590",
-          "BodyGroups": 18446744073709551615,
-          "CreateAttachments": false,
-          "MaterialOverride": "materials/default.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderOptions": {
-            "GameLayer": true,
-            "OverlayLayer": false,
-            "BloomLayer": false,
-            "AfterUILayer": false
-          },
-          "RenderType": "On",
-          "Tint": "1,0,0.93333,1"
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "c05470de-155c-48b5-8247-5e6ba6998595",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
         },
         {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "8bb3ebcf-1ec9-4b20-bf31-4aece0950008",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false,
-          "SurfaceVelocity": "0,0,0"
+          "__type": "Sandbox.Bloom",
+          "__guid": "d2163e85-ff92-4b70-9b15-1ed6ac3533a5",
+          "BloomColor": {
+            "blend": "Linear",
+            "color": [
+              {
+                "t": 0,
+                "c": "1,1,1,1"
+              },
+              {
+                "t": 1,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "BloomCurve": [
+            {
+              "x": 0,
+              "y": 0.5,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
+          "Mode": "Additive",
+          "Strength": 0.5,
+          "Threshold": 0.5,
+          "ThresholdWidth": 0.5
         },
         {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "4aaa0334-6785-4716-9bae-869559ea6e10",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {
-            "X": false,
-            "Y": false,
-            "Z": false,
-            "Pitch": false,
-            "Yaw": false,
-            "Roll": false
-          },
-          "MassCenterOverride": "0,0,0",
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "OverrideMassCenter": false,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ]
-    },
-    {
-      "__guid": "523e3e8f-a4ec-4ec1-af9a-d86ffc9c17e1",
-      "Flags": 0,
-      "Name": "Cube (1)",
-      "Position": "40.81348,46.97572,14.40159",
-      "Rotation": "0.00000001819328,-0.00000000000000008235059,0.3052325,0.952278",
-      "Scale": "0.5632889,0.5632889,0.5632889",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "9e8a546d-a41d-44b5-9906-22cea00e1066",
-          "BodyGroups": 18446744073709551615,
-          "CreateAttachments": false,
-          "MaterialOverride": "materials/default.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderOptions": {
-            "GameLayer": true,
-            "OverlayLayer": false,
-            "BloomLayer": false,
-            "AfterUILayer": false
-          },
-          "RenderType": "On",
-          "Tint": "1,0,0.93333,1"
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "ca0b702f-390a-4f01-9009-bac1b9480391",
+          "__version": 1,
+          "AutoExposureEnabled": false,
+          "ExposureBias": 2,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 2,
+          "MinimumExposure": 1,
+          "Mode": "Legacy",
+          "Rate": 1
         },
         {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "adf22580-7a25-4d7f-b1c3-3fb8fabf1612",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false,
-          "SurfaceVelocity": "0,0,0"
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "e53bfcb0-7f44-41d0-8d51-263bdc173a57",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {
-            "X": false,
-            "Y": false,
-            "Z": false,
-            "Pitch": false,
-            "Yaw": false,
-            "Roll": false
-          },
-          "MassCenterOverride": "0,0,0",
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "OverrideMassCenter": false,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ]
-    },
-    {
-      "__guid": "5b483a09-bbf2-4949-98c7-a73b789d0ee7",
-      "Flags": 0,
-      "Name": "Cube (2)",
-      "Position": "49.53707,34.08896,43.67614",
-      "Rotation": "0.00000001819328,-0.00000000000000008235059,0.3052325,0.952278",
-      "Scale": "0.5632889,0.5632889,0.5632889",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "ac284ab8-cdb7-4ba6-92de-d9be36088b1b",
-          "BodyGroups": 18446744073709551615,
-          "CreateAttachments": false,
-          "MaterialOverride": "materials/default.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderOptions": {
-            "GameLayer": true,
-            "OverlayLayer": false,
-            "BloomLayer": false,
-            "AfterUILayer": false
-          },
-          "RenderType": "On",
-          "Tint": "1,0,0.93333,1"
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "ca4eb284-231e-4c84-9bc4-7ba89962f307",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false,
-          "SurfaceVelocity": "0,0,0"
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "61ef15dd-3eb2-4f52-8b9a-315f477f79b7",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {
-            "X": false,
-            "Y": false,
-            "Z": false,
-            "Pitch": false,
-            "Yaw": false,
-            "Roll": false
-          },
-          "MassCenterOverride": "0,0,0",
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "OverrideMassCenter": false,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
+          "__type": "Sandbox.Sharpen",
+          "__guid": "bbfc0cea-d21a-42e5-8dcf-a288a1e988df",
+          "Scale": 0.2
         }
       ]
     },
@@ -286,102 +198,36 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.PlayerController",
-          "__guid": "c6cc4a63-1b44-4adc-bde5-8a75a764aba0",
-          "AimStrengthBody": 1,
-          "AimStrengthEyes": 1,
-          "AimStrengthHead": 1,
-          "Body": {
-            "_type": "component",
-            "component_id": "5ca5383c-99f7-40f6-b3b7-b2d1a6afc43f",
-            "go": "fcc997b4-3aa4-4e12-acab-095437958f0e",
-            "component_type": "Rigidbody"
-          },
-          "BodyHeight": 72,
-          "BodyMass": 500,
-          "BodyRadius": 16,
-          "CameraOffset": "75,20,0",
-          "ColliderObject": {
-            "_type": "gameobject",
-            "go": "791f6134-b8ab-4dad-b910-3f66e03eddb7"
-          },
-          "DuckedHeight": 36,
-          "DuckedSpeed": 150,
-          "EnableFootstepSounds": true,
-          "EnablePressing": true,
-          "EyeDistanceFromTop": 0,
-          "FootstepMixer": {
-            "Name": "unknown",
-            "Id": "00000000-0000-0000-0000-000000000000"
-          },
-          "FootstepVolume": 1,
-          "HideBodyInFirstPerson": true,
-          "JumpSpeed": 300,
-          "ReachLength": 130,
-          "Renderer": {
-            "_type": "component",
-            "component_id": "5dd674d6-af8d-498e-8a03-a5c9dae4ec17",
-            "go": "7e4046a3-156a-4c18-9496-8505ddbee06d",
-            "component_type": "SkinnedModelRenderer"
-          },
-          "RotateWithGround": true,
-          "RotationAngleLimit": 45,
-          "RotationSpeed": 1,
-          "RunSpeed": 400,
-          "ShowColliderComponents": false,
-          "ShowRigidbodyComponent": false,
-          "ThirdPerson": true,
-          "ToggleCameraModeButton": "view",
-          "UseAnimatorControls": true,
-          "UseButton": "use",
-          "UseCameraControls": true,
-          "UseInputControls": true,
-          "WalkSpeed": 200
-        },
-        {
           "__type": "Sandbox.Rigidbody",
-          "__guid": "5ca5383c-99f7-40f6-b3b7-b2d1a6afc43f",
-          "AngularDamping": 1,
+          "__guid": "66a67505-e7c1-437b-8642-ce599e708928",
+          "AngularDamping": 0,
           "Gravity": true,
-          "LinearDamping": 0.1,
+          "LinearDamping": 0,
           "Locking": {
             "X": false,
             "Y": false,
             "Z": false,
-            "Pitch": true,
-            "Yaw": true,
-            "Roll": true
+            "Pitch": false,
+            "Yaw": false,
+            "Roll": false
           },
-          "MassCenterOverride": "0,0,36",
-          "MassOverride": 500,
+          "MassCenterOverride": "0,0,0",
+          "MassOverride": 0,
           "MotionEnabled": true,
-          "OverrideMassCenter": true,
-          "RigidbodyFlags": "DisableCollisionSounds",
+          "OverrideMassCenter": false,
+          "RigidbodyFlags": 0,
           "StartAsleep": false
         },
         {
-          "__type": "Sandbox.Movement.MoveModeWalk",
-          "__guid": "8f3eac80-9d51-4036-a375-bb97a11933a0",
-          "GroundAngle": 45,
-          "Priority": 0,
-          "StepDownHeight": 18,
-          "StepUpHeight": 18
-        },
-        {
-          "__type": "Sandbox.Movement.MoveModeSwim",
-          "__guid": "16160e4d-c0b9-4c38-ad6f-0a9a306daacc",
-          "Priority": 10,
-          "SwimLevel": 0.7
-        },
-        {
-          "__type": "Sandbox.Movement.MoveModeLadder",
-          "__guid": "30427ed8-3345-4d94-a63c-38febf26af02",
-          "ClimbableTags": "ladder",
-          "Priority": 5
-        },
-        {
           "__type": "scraprunners.PlayerController",
-          "__guid": "d58a2e1e-7cac-4831-a576-1f4c6b7aab5c"
+          "__guid": "f7cfabbf-d36a-4855-98b2-27f27ae50191",
+          "FirstPersonCam": {
+            "_type": "gameobject",
+            "go": "ecb62f74-d9ad-4782-a27e-0db56012aa36"
+          },
+          "IsFirstPerson": true,
+          "MovementSpeed": 1,
+          "ThirdPersonCamOffsets": "60,-10,70"
         }
       ],
       "Children": [
@@ -423,174 +269,137 @@
           ]
         },
         {
-          "__guid": "791f6134-b8ab-4dad-b910-3f66e03eddb7",
-          "Flags": 1,
+          "__guid": "7727101b-7f63-4d1d-ae21-a1c56ffcfb30",
+          "Flags": 0,
           "Name": "Colliders",
+          "Position": "1.960907,0.00001567602,33.81187",
+          "Scale": "0.6733189,0.7463933,2.144143",
           "Enabled": true,
           "Components": [
             {
-              "__type": "Sandbox.CapsuleCollider",
-              "__guid": "0334dd3a-cd60-4fc0-af7f-9a372ca819b6",
-              "End": "0,0,45.05097",
-              "Friction": 0,
-              "IsTrigger": false,
-              "Radius": 11.313708,
-              "Start": "0,0,60.68629",
-              "Static": false,
-              "SurfaceVelocity": "0,0,0"
-            },
-            {
               "__type": "Sandbox.BoxCollider",
-              "__guid": "280d8c85-3929-41db-8d22-ec8a56e01acf",
-              "Center": "0,0,18",
-              "Friction": 0,
+              "__guid": "fabb5e33-acf6-4278-b847-a45988f3f080",
+              "Center": "0,0,0",
               "IsTrigger": false,
-              "Scale": "16,16,36",
+              "Scale": "32,32,32",
               "Static": false,
               "SurfaceVelocity": "0,0,0"
             }
           ]
         },
         {
-          "__guid": "f535deff-a1bf-49a2-b1c7-46ad2e05e381",
+          "__guid": "ecb62f74-d9ad-4782-a27e-0db56012aa36",
           "Flags": 0,
-          "Name": "Camera",
-          "Position": "0,0,80.22905",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "c05470de-155c-48b5-8247-5e6ba6998595",
-              "BackgroundColor": "0.33333,0.46275,0.52157,1",
-              "ClearFlags": "All",
-              "FieldOfView": 60,
-              "IsMainCamera": true,
-              "Orthographic": false,
-              "OrthographicHeight": 1204,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": "",
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 10000,
-              "ZNear": 10
-            },
-            {
-              "__type": "Sandbox.Bloom",
-              "__guid": "d2163e85-ff92-4b70-9b15-1ed6ac3533a5",
-              "BloomColor": {
-                "blend": "Linear",
-                "color": [
-                  {
-                    "t": 0,
-                    "c": "1,1,1,1"
-                  },
-                  {
-                    "t": 1,
-                    "c": "1,1,1,1"
-                  }
-                ],
-                "alpha": []
-              },
-              "BloomCurve": [
-                {
-                  "x": 0,
-                  "y": 0.5,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                },
-                {
-                  "x": 1,
-                  "y": 1,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                }
-              ],
-              "Mode": "Additive",
-              "Strength": 0.5,
-              "Threshold": 0.5,
-              "ThresholdWidth": 0.5
-            },
-            {
-              "__type": "Sandbox.Tonemapping",
-              "__guid": "ca0b702f-390a-4f01-9009-bac1b9480391",
-              "__version": 1,
-              "AutoExposureEnabled": false,
-              "ExposureBias": 2,
-              "ExposureCompensation": 0,
-              "ExposureMethod": "RGB",
-              "MaximumExposure": 2,
-              "MinimumExposure": 1,
-              "Mode": "Legacy",
-              "Rate": 1
-            },
-            {
-              "__type": "Sandbox.Sharpen",
-              "__guid": "bbfc0cea-d21a-42e5-8dcf-a288a1e988df",
-              "Scale": 0.2
-            }
-          ]
+          "Name": "FPSCam",
+          "Position": "5.31015,0.00004696846,61.39706",
+          "Enabled": true
         }
       ]
     },
     {
-      "__guid": "67833d0e-acf0-42ad-a4ec-d132981bb2e6",
+      "__guid": "e5899356-e76d-4bc0-a97d-0a647547e152",
       "Flags": 0,
       "Name": "Truck",
-      "Position": "184.5767,-66.48828,23.85755",
-      "Rotation": "0,0,0.7071068,0.7071068",
+      "Position": "-25.30372,-69.66205,23.939",
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "2964b279-9a5f-47cb-9700-d465c2b310e7",
-          "Center": "0,107.6999,42.70001",
-          "IsTrigger": false,
-          "Scale": "64.79999,231.9,95.80002",
-          "Static": false,
-          "SurfaceVelocity": "0,0,0"
+          "__type": "Sandbox.Rigidbody",
+          "__guid": "e74aa2fd-4d1f-41e3-8938-5fd92b91c3d7",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {
+            "X": false,
+            "Y": false,
+            "Z": false,
+            "Pitch": false,
+            "Yaw": false,
+            "Roll": false
+          },
+          "MassCenterOverride": "0,0,0",
+          "MassOverride": 0,
+          "MotionEnabled": true,
+          "OverrideMassCenter": false,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
         },
         {
-          "__type": "TruckController",
-          "__guid": "7035dbce-c273-4cc0-a272-2b37391fe8d7"
+          "__type": "scraprunners.TruckController",
+          "__guid": "d0a4deb9-f41c-4cb6-817e-382d325fb1ed",
+          "__enabled": false,
+          "FirstPersonCam": {
+            "_type": "gameobject",
+            "go": "7ac87626-acd4-466a-b5a5-e7c1d30c36da"
+          },
+          "MovementSpeed": 1,
+          "ThirdPersonCamOffsets": "100,0,100"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "57b6eb57-e5ce-46d6-9371-be9d18f5f46a",
+          "Flags": 0,
+          "Name": "Body",
+          "Position": "165.0105,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "2aada989-14b2-4d74-8b94-701b8c3781d4",
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "CreateBoneObjects": false,
+              "Model": "models/blockout/truck/truck_base.vmdl",
+              "Morphs": {},
+              "Parameters": {
+                "bools": {},
+                "ints": {},
+                "floats": {},
+                "vectors": {},
+                "rotations": {}
+              },
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Sequence": {
+                "Name": null
+              },
+              "Tint": "1,1,1,1",
+              "UseAnimGraph": true
+            }
+          ]
         },
         {
-          "__type": "Sandbox.Movement.MoveModeWalk",
-          "__guid": "3b788a31-71c2-4bcf-a8bd-29f82cf8b3ee",
-          "GroundAngle": 45,
-          "Priority": 0,
-          "StepDownHeight": 18,
-          "StepUpHeight": 18
+          "__guid": "7bf991a7-b079-4ae0-bbf7-aa9a71197709",
+          "Flags": 0,
+          "Name": "Colliders",
+          "Position": "63.39478,0,45.12074",
+          "Scale": "7.156619,2.064112,2.878891",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "6318e29f-3a6d-484e-9f53-64e99a9fd1bc",
+              "Center": "0,0,0",
+              "Friction": 1,
+              "IsTrigger": false,
+              "Scale": "32,32,32",
+              "Static": false,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
         },
         {
-          "__type": "Sandbox.SkinnedModelRenderer",
-          "__guid": "1090dd0b-92dc-4ac9-8c05-4e41ce77f78e",
-          "BodyGroups": 18446744073709551615,
-          "CreateAttachments": false,
-          "CreateBoneObjects": false,
-          "Model": "models/blockout/truck/truck_base.vmdl",
-          "Morphs": {},
-          "Parameters": {
-            "bools": {},
-            "ints": {},
-            "floats": {},
-            "vectors": {},
-            "rotations": {}
-          },
-          "RenderOptions": {
-            "GameLayer": true,
-            "OverlayLayer": false,
-            "BloomLayer": false,
-            "AfterUILayer": false
-          },
-          "RenderType": "On",
-          "Sequence": {
-            "Name": null
-          },
-          "Tint": "1,1,1,1",
-          "UseAnimGraph": true
+          "__guid": "7ac87626-acd4-466a-b5a5-e7c1d30c36da",
+          "Flags": 0,
+          "Name": "FPSCam",
+          "Position": "130.3343,16.4994,53.68123",
+          "Enabled": true
         }
       ]
     }
