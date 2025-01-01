@@ -112,6 +112,7 @@
       "Name": "Camera",
       "Position": "179.7914,-165.616,97.72534",
       "Rotation": "0,0,0.7071067,0.7071068",
+      "Tags": "player",
       "Enabled": true,
       "Components": [
         {
@@ -195,6 +196,7 @@
       "Name": "Player",
       "Position": "16.15096,-165.616,17.49629",
       "Rotation": "0,0,0.7071067,0.7071068",
+      "Tags": "player",
       "Enabled": true,
       "Components": [
         {
@@ -207,12 +209,12 @@
             "X": false,
             "Y": false,
             "Z": false,
-            "Pitch": false,
+            "Pitch": true,
             "Yaw": false,
-            "Roll": false
+            "Roll": true
           },
           "MassCenterOverride": "0,0,0",
-          "MassOverride": 0,
+          "MassOverride": 10,
           "MotionEnabled": true,
           "OverrideMassCenter": false,
           "RigidbodyFlags": 0,
@@ -226,8 +228,14 @@
             "go": "ecb62f74-d9ad-4782-a27e-0db56012aa36"
           },
           "IsFirstPerson": true,
-          "MovementSpeed": 1,
-          "ThirdPersonCamOffsets": "60,-10,70"
+          "MovementSpeed": 15,
+          "Rigidbody": {
+            "_type": "component",
+            "component_id": "66a67505-e7c1-437b-8642-ce599e708928",
+            "go": "fcc997b4-3aa4-4e12-acab-095437958f0e",
+            "component_type": "Rigidbody"
+          },
+          "ThirdPersonCamOffsets": "60,-10,0"
         }
       ],
       "Children": [
@@ -318,7 +326,7 @@
             "Roll": false
           },
           "MassCenterOverride": "0,0,0",
-          "MassOverride": 0,
+          "MassOverride": 10000,
           "MotionEnabled": true,
           "OverrideMassCenter": false,
           "RigidbodyFlags": 0,
@@ -336,8 +344,9 @@
             "_type": "gameobject",
             "go": "7ac87626-acd4-466a-b5a5-e7c1d30c36da"
           },
-          "MovementSpeed": 1,
-          "ThirdPersonCamOffsets": "100,0,100"
+          "MovementSpeed": 30,
+          "Rigidbody": null,
+          "ThirdPersonCamOffsets": "300,-20,50"
         }
       ],
       "Children": [

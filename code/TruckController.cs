@@ -34,12 +34,20 @@ public class TruckController : PlayerController
 			DriverExit();
 		}
 	}
+
+	// protected override void PositionPlayer()
+	// {
+	// 	var wishPosition = (Input.AnalogMove * EyeAngles.ToRotation()).WithZ( 0f ).Normal;
+	// 	WorldPosition += wishPosition * MovementSpeed;
+	// 	// WorldRotation = EyeAngles.WithRoll( 0 ).WithPitch( 0 ).ToRotation();
+	// }
+
 	protected void DriverExit()
 	{
 		this.Enabled = false;
+		Driver.WorldPosition = ExitPosition.WorldPosition;
+		Driver.WorldRotation = Camera.WorldRotation;
 		Driver.Enabled = true;
-		Driver.WorldTransform = ExitPosition.WorldTransform;
-		Driver.WorldRotation = EyeAngles.ToRotation();
 	}
 
 }

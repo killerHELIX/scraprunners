@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace scraprunners;
 
@@ -6,16 +7,14 @@ public class PlayerController : Component
 {
 
 
-	[Property]
-	public GameObject FirstPersonCam;
-	[Property]
-	public Vector3 ThirdPersonCamOffsets;
+	[Property] public GameObject FirstPersonCam;
+	[Property] public Vector3 ThirdPersonCamOffsets;
 
-	[Property]
-	private bool IsFirstPerson = true;
+	[Property] private bool IsFirstPerson = true;
 
-	[Property]
-	public float MovementSpeed;
+	[Property] public float MovementSpeed;
+
+	[Property] public Rigidbody Rigidbody;
 
 	public bool Waiting = false;
 
@@ -42,7 +41,7 @@ public class PlayerController : Component
 	protected async void Wait()
 	{
 		Waiting = true;
-		await GameTask.Delay(200);
+		await GameTask.Delay( 200 );
 		Waiting = false;
 	}
 
@@ -79,9 +78,20 @@ public class PlayerController : Component
 
 	protected virtual void PositionPlayer()
 	{
+		// var wishPosition = (Input.AnalogMove * EyeAngles.ToRotation()).WithZ( 0f ).Normal;
+		// WorldPosition += wishPosition * MovementSpeed;
+		// WorldRotation = EyeAngles.WithRoll( 0 ).WithPitch( 0 ).ToRotation();
+
+		if (Input.Down("jump"))
+		{
+			DebugLog("jump");
+			Rigidbody.ApplyForce(Vector3.Up * MovementSpeed * 10);
+		}
+
 		var wishPosition = (Input.AnalogMove * EyeAngles.ToRotation()).WithZ( 0f ).Normal;
-		WorldPosition += wishPosition * MovementSpeed;
-		WorldRotation = EyeAngles.WithRoll( 0 ).WithPitch( 0 ).ToRotation();
+		Rigidbody.SmoothMove(new Transform(WorldPosition + wishPosition * MovementSpeed), 0.1f, Time.Delta);
+		Rigidbody.SmoothRotate(Camera.WorldRotation, 0.1f, Time.Delta);
+
 	}
 
 	protected virtual void PositionCamera()
@@ -103,7 +113,7 @@ public class PlayerController : Component
 			camTrace += Camera.WorldRotation.Left * ThirdPersonCamOffsets.y;
 			camTrace += Camera.WorldRotation.Up * ThirdPersonCamOffsets.z;
 
-			var tr = Scene.Trace.Ray( FirstPersonCam.WorldPosition, WorldPosition + camTrace ).Run();
+			var tr = Scene.Trace.Ray( FirstPersonCam.WorldPosition, FirstPersonCam.WorldPosition + camTrace ).Run();
 			if ( tr.Hit )
 			{
 				Camera.WorldPosition = tr.HitPosition + camTrace.Normal;
