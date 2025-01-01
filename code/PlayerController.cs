@@ -116,7 +116,7 @@ public class PlayerController : Component
 			var tr = Scene.Trace.Ray( FirstPersonCam.WorldPosition, FirstPersonCam.WorldPosition + camTrace ).Run();
 			if ( tr.Hit )
 			{
-				Camera.WorldPosition = tr.HitPosition + camTrace.Normal;
+				Camera.WorldPosition = tr.HitPosition - (camTrace.Normal * 10f);
 			}
 			else
 			{

@@ -191,120 +191,6 @@
       ]
     },
     {
-      "__guid": "fcc997b4-3aa4-4e12-acab-095437958f0e",
-      "Flags": 0,
-      "Name": "Player",
-      "Position": "16.15096,-165.616,17.49629",
-      "Rotation": "0,0,0.7071067,0.7071068",
-      "Tags": "player",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "66a67505-e7c1-437b-8642-ce599e708928",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {
-            "X": false,
-            "Y": false,
-            "Z": false,
-            "Pitch": true,
-            "Yaw": false,
-            "Roll": true
-          },
-          "MassCenterOverride": "0,0,0",
-          "MassOverride": 10,
-          "MotionEnabled": true,
-          "OverrideMassCenter": false,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        },
-        {
-          "__type": "scraprunners.PlayerController",
-          "__guid": "f7cfabbf-d36a-4855-98b2-27f27ae50191",
-          "FirstPersonCam": {
-            "_type": "gameobject",
-            "go": "ecb62f74-d9ad-4782-a27e-0db56012aa36"
-          },
-          "IsFirstPerson": true,
-          "MovementSpeed": 15,
-          "Rigidbody": {
-            "_type": "component",
-            "component_id": "66a67505-e7c1-437b-8642-ce599e708928",
-            "go": "fcc997b4-3aa4-4e12-acab-095437958f0e",
-            "component_type": "Rigidbody"
-          },
-          "ThirdPersonCamOffsets": "60,-10,0"
-        }
-      ],
-      "Children": [
-        {
-          "__guid": "7e4046a3-156a-4c18-9496-8505ddbee06d",
-          "Flags": 0,
-          "Name": "Body",
-          "Tags": "viewer",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "5dd674d6-af8d-498e-8a03-a5c9dae4ec17",
-              "BodyGroups": 341,
-              "CreateAttachments": false,
-              "CreateBoneObjects": false,
-              "Model": "models/citizen/citizen.vmdl",
-              "Morphs": {},
-              "Parameters": {
-                "bools": {},
-                "ints": {},
-                "floats": {},
-                "vectors": {},
-                "rotations": {}
-              },
-              "RenderOptions": {
-                "GameLayer": true,
-                "OverlayLayer": false,
-                "BloomLayer": false,
-                "AfterUILayer": false
-              },
-              "RenderType": "On",
-              "Sequence": {
-                "Name": null
-              },
-              "Tint": "1,1,1,1",
-              "UseAnimGraph": true
-            }
-          ]
-        },
-        {
-          "__guid": "7727101b-7f63-4d1d-ae21-a1c56ffcfb30",
-          "Flags": 0,
-          "Name": "Colliders",
-          "Position": "1.960907,0.00001567602,33.81187",
-          "Scale": "0.6733189,0.7463933,2.144143",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "fabb5e33-acf6-4278-b847-a45988f3f080",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "32,32,32",
-              "Static": false,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ]
-        },
-        {
-          "__guid": "ecb62f74-d9ad-4782-a27e-0db56012aa36",
-          "Flags": 0,
-          "Name": "FPSCam",
-          "Position": "5.31015,0.00004696846,61.39706",
-          "Enabled": true
-        }
-      ]
-    },
-    {
       "__guid": "e5899356-e76d-4bc0-a97d-0a647547e152",
       "Flags": 0,
       "Name": "Truck",
@@ -334,8 +220,7 @@
         },
         {
           "__type": "scraprunners.TruckController",
-          "__guid": "d0a4deb9-f41c-4cb6-817e-382d325fb1ed",
-          "__enabled": false,
+          "__guid": "c4336a3a-536a-44a4-b1fc-4dfc6d3c7102",
           "ExitPosition": {
             "_type": "gameobject",
             "go": "157fd363-0104-4ef8-9a0b-7e234682a766"
@@ -344,9 +229,9 @@
             "_type": "gameobject",
             "go": "7ac87626-acd4-466a-b5a5-e7c1d30c36da"
           },
-          "MovementSpeed": 30,
-          "Rigidbody": null,
-          "ThirdPersonCamOffsets": "300,-20,50"
+          "IsFirstPerson": true,
+          "MovementSpeed": 2,
+          "ThirdPersonCamOffsets": "256,-15,0"
         }
       ],
       "Children": [
@@ -420,6 +305,168 @@
           "Name": "ExitPosition",
           "Position": "125.4281,54.41969,14.61699",
           "Enabled": true
+        }
+      ]
+    },
+    {
+      "__guid": "b186de5a-2ceb-4039-9fe3-2042b173a04e",
+      "Flags": 0,
+      "Name": "Player",
+      "Position": "20.79674,-205.4831,33.44547",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.PlayerController",
+          "__guid": "f7abd909-5ca0-46c3-8d98-fe94996f2540",
+          "AimStrengthBody": 1,
+          "AimStrengthEyes": 1,
+          "AimStrengthHead": 1,
+          "Body": {
+            "_type": "component",
+            "component_id": "cd35efca-1090-4864-a96c-ec5558c6d3af",
+            "go": "b186de5a-2ceb-4039-9fe3-2042b173a04e",
+            "component_type": "Rigidbody"
+          },
+          "BodyHeight": 72,
+          "BodyMass": 500,
+          "BodyRadius": 16,
+          "CameraOffset": "64,0,12",
+          "ColliderObject": {
+            "_type": "gameobject",
+            "go": "966d6804-00b7-466f-98b5-1fa88ff56eaf"
+          },
+          "DuckedHeight": 36,
+          "DuckedSpeed": 70,
+          "EnableFootstepSounds": true,
+          "EnablePressing": true,
+          "EyeDistanceFromTop": 8,
+          "FootstepMixer": {
+            "Name": "unknown",
+            "Id": "00000000-0000-0000-0000-000000000000"
+          },
+          "FootstepVolume": 1,
+          "HideBodyInFirstPerson": true,
+          "JumpSpeed": 300,
+          "ReachLength": 130,
+          "Renderer": {
+            "_type": "component",
+            "component_id": "c796263b-39bf-41ff-84bc-240749292348",
+            "go": "cce9a85a-564e-458b-8f5d-7863476b883e",
+            "component_type": "SkinnedModelRenderer"
+          },
+          "RotateWithGround": true,
+          "RotationAngleLimit": 45,
+          "RotationSpeed": 1,
+          "RunSpeed": 320,
+          "ShowColliderComponents": false,
+          "ShowRigidbodyComponent": false,
+          "ThirdPerson": true,
+          "ToggleCameraModeButton": "view",
+          "UseAnimatorControls": true,
+          "UseButton": "use",
+          "UseCameraControls": true,
+          "UseInputControls": true,
+          "WalkSpeed": 110
+        },
+        {
+          "__type": "Sandbox.Rigidbody",
+          "__guid": "cd35efca-1090-4864-a96c-ec5558c6d3af",
+          "AngularDamping": 1,
+          "Gravity": true,
+          "LinearDamping": 0.1,
+          "Locking": {
+            "X": false,
+            "Y": false,
+            "Z": false,
+            "Pitch": true,
+            "Yaw": true,
+            "Roll": true
+          },
+          "MassCenterOverride": "0,0,36",
+          "MassOverride": 500,
+          "MotionEnabled": true,
+          "OverrideMassCenter": true,
+          "RigidbodyFlags": "DisableCollisionSounds",
+          "StartAsleep": false
+        },
+        {
+          "__type": "Sandbox.Movement.MoveModeWalk",
+          "__guid": "1002f4aa-9f46-41e0-abcc-2d2a6ab7d703",
+          "GroundAngle": 45,
+          "Priority": 0,
+          "StepDownHeight": 18,
+          "StepUpHeight": 18
+        },
+        {
+          "__type": "PlayerControllerEventListener",
+          "__guid": "6109bb7e-2ad8-4b42-8b4e-f7d445392efd"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "cce9a85a-564e-458b-8f5d-7863476b883e",
+          "Flags": 0,
+          "Name": "Body",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "c796263b-39bf-41ff-84bc-240749292348",
+              "BodyGroups": 341,
+              "CreateAttachments": false,
+              "CreateBoneObjects": false,
+              "Model": "models/citizen/citizen.vmdl",
+              "Morphs": {},
+              "Parameters": {
+                "bools": {},
+                "ints": {},
+                "floats": {},
+                "vectors": {},
+                "rotations": {}
+              },
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Sequence": {
+                "Name": null
+              },
+              "Tint": "1,1,1,1",
+              "UseAnimGraph": true
+            }
+          ]
+        },
+        {
+          "__guid": "966d6804-00b7-466f-98b5-1fa88ff56eaf",
+          "Flags": 1,
+          "Name": "Colliders",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.CapsuleCollider",
+              "__guid": "f5c89b57-dc9e-4f4d-bf7b-0e2bb8c7d1cb",
+              "End": "0,0,45.05097",
+              "Friction": 0,
+              "IsTrigger": false,
+              "Radius": 11.313708,
+              "Start": "0,0,60.68629",
+              "Static": false,
+              "SurfaceVelocity": "0,0,0"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "848162bb-8eff-4c87-a8ee-63b1b3506d7e",
+              "Center": "0,0,18",
+              "Friction": 0,
+              "IsTrigger": false,
+              "Scale": "16,16,36",
+              "Static": false,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
         }
       ]
     }
