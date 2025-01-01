@@ -193,7 +193,7 @@
       "__guid": "fcc997b4-3aa4-4e12-acab-095437958f0e",
       "Flags": 0,
       "Name": "Player",
-      "Position": "179.7914,-165.616,17.49629",
+      "Position": "16.15096,-165.616,17.49629",
       "Rotation": "0,0,0.7071067,0.7071068",
       "Enabled": true,
       "Components": [
@@ -328,6 +328,10 @@
           "__type": "scraprunners.TruckController",
           "__guid": "d0a4deb9-f41c-4cb6-817e-382d325fb1ed",
           "__enabled": false,
+          "ExitPosition": {
+            "_type": "gameobject",
+            "go": "157fd363-0104-4ef8-9a0b-7e234682a766"
+          },
           "FirstPersonCam": {
             "_type": "gameobject",
             "go": "7ac87626-acd4-466a-b5a5-e7c1d30c36da"
@@ -399,6 +403,13 @@
           "Flags": 0,
           "Name": "FPSCam",
           "Position": "130.3343,16.4994,53.68123",
+          "Enabled": true
+        },
+        {
+          "__guid": "157fd363-0104-4ef8-9a0b-7e234682a766",
+          "Flags": 0,
+          "Name": "ExitPosition",
+          "Position": "125.4281,54.41969,14.61699",
           "Enabled": true
         }
       ]

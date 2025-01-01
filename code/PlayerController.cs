@@ -17,6 +17,8 @@ public class PlayerController : Component
 	[Property]
 	public float MovementSpeed;
 
+	public bool Waiting = false;
+
 	public CameraComponent Camera;
 	public Angles EyeAngles;
 	protected override void OnStart()
@@ -26,20 +28,29 @@ public class PlayerController : Component
 
 	protected override void OnUpdate()
 	{
-		HandleUseInput();
-		HandleViewInput();
+
+		if ( !Waiting )
+		{
+			HandleUseInput();
+			HandleViewInput();
+		}
 
 		PositionCamera();
 		PositionPlayer();
 	}
 
-	private void HandleUseInput()
+	protected async void Wait()
+	{
+		Waiting = true;
+		await GameTask.Delay(200);
+		Waiting = false;
+	}
+
+	protected virtual void HandleUseInput()
 	{
 		if ( Input.Pressed( "use" ) )
 		{
-			Log.Info( "use" );
-			Gizmo.Draw.Line( FirstPersonCam.WorldPosition, FirstPersonCam.WorldPosition + Camera.WorldRotation.Forward * 50f );
-			var tr = Scene.Trace.Ray( FirstPersonCam.WorldPosition, FirstPersonCam.WorldPosition + Camera.WorldRotation.Forward * 50f ).WithoutTags( "player" ).Run();
+			var tr = Scene.Trace.Ray( FirstPersonCam.WorldPosition, FirstPersonCam.WorldPosition + Camera.WorldRotation.Forward * 100f ).WithoutTags( "player" ).Run();
 			if ( tr.Hit )
 			{
 				Log.Info( tr.GameObject );
@@ -47,31 +58,33 @@ public class PlayerController : Component
 				if ( ctrl.Any() )
 				{
 					var truck = ctrl.First();
-					Log.Info( "TRUCK DETECTED!!!" );
-					truck.Drive(this);
+					Log.Info( "Player -- Using Truck" );
+					truck.Drive( GameObject );
 
 				}
 			}
 		}
 	}
 
-	private void HandleViewInput()
+	protected virtual void HandleViewInput()
 	{
 		if ( Input.Pressed( "view" ) )
 		{
-			Log.Info( "view" );
+			DebugLog( "View" );
 			IsFirstPerson = !IsFirstPerson;
+
+			// Wait();
 		}
 	}
 
-	private void PositionPlayer()
+	protected virtual void PositionPlayer()
 	{
 		var wishPosition = (Input.AnalogMove * EyeAngles.ToRotation()).WithZ( 0f ).Normal;
 		WorldPosition += wishPosition * MovementSpeed;
 		WorldRotation = EyeAngles.WithRoll( 0 ).WithPitch( 0 ).ToRotation();
 	}
 
-	private void PositionCamera()
+	protected virtual void PositionCamera()
 	{
 		EyeAngles += Input.AnalogLook;
 		EyeAngles.roll = 0;
@@ -101,5 +114,10 @@ public class PlayerController : Component
 
 			}
 		}
+	}
+
+	protected void DebugLog( string msg )
+	{
+		Log.Error( this + ": " + msg );
 	}
 }

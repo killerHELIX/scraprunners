@@ -4,30 +4,42 @@ using static Sandbox.Component;
 
 namespace scraprunners;
 
-public sealed class TruckController : PlayerController
+public class TruckController : PlayerController
 {
 
-	public PlayerController Driver;
+	public GameObject Driver;
 
-	public void Drive( PlayerController pc )
+	[Property] public GameObject ExitPosition;
+
+	public void Drive( GameObject driver )
 	{
-		Driver = pc;
+		Driver = driver;
 
-		this.Enabled = true;
 		Driver.Enabled = false;
+		this.Enabled = true;
+
+		// Wait();
 	}
 
 	protected override void OnUpdate()
 	{
-
 		base.OnUpdate();
+	}
 
-		if (Input.Pressed("use"))
+	protected override void HandleUseInput()
+	{
+		if ( Input.Pressed( "use" ) )
 		{
-			Log.Info("TRUCK USE!!");
-			Driver.Enabled = true;
-			this.Enabled = false;
+			Log.Info( "Truck -- Use" );
+			DriverExit();
 		}
+	}
+	protected void DriverExit()
+	{
+		this.Enabled = false;
+		Driver.Enabled = true;
+		Driver.WorldTransform = ExitPosition.WorldTransform;
+		Driver.WorldRotation = EyeAngles.ToRotation();
 	}
 
 }
