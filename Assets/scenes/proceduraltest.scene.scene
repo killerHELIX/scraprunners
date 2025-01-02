@@ -9,45 +9,7 @@
       "Components": [
         {
           "__type": "ProceduralDesertGeneration",
-          "__guid": "268ca857-0439-40d4-83a2-cf2b5bec53da"
-        },
-        {
-          "__type": "ProceduralQuadGenerator",
-          "__guid": "f0138054-299f-44b0-8629-bcd230a1160f",
-          "__enabled": false,
-          "PlaneSize": 100
-        }
-      ]
-    },
-    {
-      "__guid": "b4b0806f-3486-4695-a3e9-3b29cec79a66",
-      "Flags": 0,
-      "Name": "Camera",
-      "Position": "0,0,59.56342",
-      "Rotation": "0,0.7071066,0,0.7071069",
-      "Tags": "maincamera",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.CameraComponent",
-          "__guid": "9c813d9c-20ec-42a5-adfd-1acc56d3b2fa",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 60,
-          "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 10
-        },
-        {
-          "__type": "CameraRotate",
-          "__guid": "99de4df0-78eb-4a4b-8e58-70c7893451e5"
+          "__guid": "f98b84a7-df44-42c7-9d60-ce86b885d2bf"
         }
       ]
     },
@@ -91,6 +53,7 @@
       "__guid": "3e5f507c-eccf-4635-83ab-02335d4cba09",
       "Flags": 0,
       "Name": "Cube",
+      "Position": "0,0,47.97691",
       "Components": [
         {
           "__type": "Sandbox.ModelRenderer",
@@ -107,6 +70,346 @@
           },
           "RenderType": "On",
           "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "a83a6ca4-b2dd-465d-a553-5c4ab62e8529",
+      "Flags": 0,
+      "Name": "Truck",
+      "Position": "-21.17035,-11.23456,31.37688",
+      "__Prefab": "prefabs/truck.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "9c084af7-fee4-4d95-8d8d-84727b866643",
+      "Flags": 0,
+      "Name": "Cube",
+      "Position": "0,0,113.1298",
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "00a5a78a-c7da-45fe-91ca-aea73a9ab339",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "Model": "models/dev/box.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "b13a7c51-156e-4487-9fa4-c74c36c504dc",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "37.1,39.49998,32.8",
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "Sandbox.Rigidbody",
+          "__guid": "06a4518e-1586-415a-b0e8-3584d27f8124",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {
+            "X": false,
+            "Y": false,
+            "Z": false,
+            "Pitch": false,
+            "Yaw": false,
+            "Roll": false
+          },
+          "MassCenterOverride": "0,0,0",
+          "MassOverride": 0,
+          "MotionEnabled": true,
+          "OverrideMassCenter": false,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        }
+      ]
+    },
+    {
+      "__guid": "7fd7487f-905a-4c15-8064-28788547a367",
+      "Flags": 0,
+      "Name": "Player Controller",
+      "Position": "0,0.6,13.20232",
+      "Components": [
+        {
+          "__type": "Sandbox.PlayerController",
+          "__guid": "43474325-9df5-409a-9699-f772906c2f8d",
+          "AimStrengthBody": 1,
+          "AimStrengthEyes": 1,
+          "AimStrengthHead": 1,
+          "Body": {
+            "_type": "component",
+            "component_id": "dc268454-cc43-4343-bd04-e32995bee201",
+            "go": "7fd7487f-905a-4c15-8064-28788547a367",
+            "component_type": "Rigidbody"
+          },
+          "BodyHeight": 72,
+          "BodyMass": 500,
+          "BodyRadius": 16,
+          "CameraOffset": "256,0,12",
+          "ColliderObject": {
+            "_type": "gameobject",
+            "go": "735c3b70-2be1-4db3-95b0-7867627e1e8e"
+          },
+          "DuckedHeight": 36,
+          "DuckedSpeed": 70,
+          "EnableFootstepSounds": true,
+          "EnablePressing": true,
+          "EyeDistanceFromTop": 8,
+          "FootstepMixer": {
+            "Name": "unknown",
+            "Id": "00000000-0000-0000-0000-000000000000"
+          },
+          "FootstepVolume": 1,
+          "HideBodyInFirstPerson": true,
+          "JumpSpeed": 300,
+          "ReachLength": 130,
+          "Renderer": {
+            "_type": "component",
+            "component_id": "5afcc318-8460-484b-83b8-82315e7585f5",
+            "go": "73da413b-df62-4903-ad62-c2f103aa3743",
+            "component_type": "SkinnedModelRenderer"
+          },
+          "RotateWithGround": true,
+          "RotationAngleLimit": 45,
+          "RotationSpeed": 1,
+          "RunSpeed": 320,
+          "ShowColliderComponents": true,
+          "ShowRigidbodyComponent": true,
+          "ThirdPerson": true,
+          "ToggleCameraModeButton": "view",
+          "UseAnimatorControls": true,
+          "UseButton": "use",
+          "UseCameraControls": true,
+          "UseInputControls": true,
+          "WalkSpeed": 110
+        },
+        {
+          "__type": "Sandbox.Rigidbody",
+          "__guid": "dc268454-cc43-4343-bd04-e32995bee201",
+          "__enabled": false,
+          "AngularDamping": 1,
+          "Gravity": true,
+          "LinearDamping": 0.1,
+          "Locking": {
+            "X": false,
+            "Y": false,
+            "Z": false,
+            "Pitch": true,
+            "Yaw": true,
+            "Roll": true
+          },
+          "MassCenterOverride": "0,0,36",
+          "MassOverride": 500,
+          "MotionEnabled": true,
+          "OverrideMassCenter": true,
+          "RigidbodyFlags": "DisableCollisionSounds",
+          "StartAsleep": false
+        },
+        {
+          "__type": "Sandbox.Movement.MoveModeWalk",
+          "__guid": "79143173-55a6-4244-978d-bedd481b308e",
+          "GroundAngle": 45,
+          "Priority": 0,
+          "StepDownHeight": 18,
+          "StepUpHeight": 18
+        },
+        {
+          "__type": "Sandbox.Movement.MoveModeSwim",
+          "__guid": "0f4ea477-4b4f-48c4-a0ed-b9bb68ac4fcd",
+          "Priority": 10,
+          "SwimLevel": 0.7
+        },
+        {
+          "__type": "Sandbox.Movement.MoveModeLadder",
+          "__guid": "7f567e8d-ba9e-4a96-bb4e-f0345c60b9fe",
+          "ClimbableTags": "ladder",
+          "Priority": 5
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "73da413b-df62-4903-ad62-c2f103aa3743",
+          "Flags": 0,
+          "Name": "Body",
+          "Position": "0,0,31.48673",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "5afcc318-8460-484b-83b8-82315e7585f5",
+              "BodyGroups": 341,
+              "CreateAttachments": false,
+              "CreateBoneObjects": false,
+              "Model": "models/citizen/citizen.vmdl",
+              "Morphs": {},
+              "Parameters": {
+                "bools": {},
+                "ints": {},
+                "floats": {},
+                "vectors": {},
+                "rotations": {}
+              },
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Sequence": {
+                "Name": null
+              },
+              "Tint": "1,1,1,1",
+              "UseAnimGraph": true
+            }
+          ]
+        },
+        {
+          "__guid": "735c3b70-2be1-4db3-95b0-7867627e1e8e",
+          "Flags": 0,
+          "Name": "Colliders",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.CapsuleCollider",
+              "__guid": "899bbac7-3fd6-4785-bdd3-a195da6019c9",
+              "End": "0,0,45.05097",
+              "Friction": 0,
+              "IsTrigger": false,
+              "Radius": 11.313708,
+              "Start": "0,0,60.68629",
+              "Static": false,
+              "SurfaceVelocity": "0,0,0"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "e2317dbc-be78-417c-a72c-57e76d48c58a",
+              "Center": "0,0,18",
+              "Friction": 0,
+              "IsTrigger": false,
+              "Scale": "16,16,36",
+              "Static": false,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
+        },
+        {
+          "__guid": "d8809b7a-6631-46db-b2c7-208594f53005",
+          "Flags": 0,
+          "Name": "Camera",
+          "Position": "2.224344,0,94.52867",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.CameraComponent",
+              "__guid": "000f6a55-0b38-43c1-aaad-3cdc8873022a",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 60,
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 10000,
+              "ZNear": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "705acff2-cd35-4b01-b9b7-dcef4e1601c7",
+      "Flags": 0,
+      "Name": "Sphere",
+      "Position": "0,0,93.74829",
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "2ba0fb82-d623-4a3c-bb9f-158a2c3f605a",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "Model": "models/dev/sphere.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "d62f8d1e-64ad-4730-83e7-7ac8df4386b6",
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Radius": 10.000007,
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "Sandbox.Rigidbody",
+          "__guid": "33811c0a-124d-4e12-8968-e440a822f4b2",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {
+            "X": false,
+            "Y": false,
+            "Z": false,
+            "Pitch": false,
+            "Yaw": false,
+            "Roll": false
+          },
+          "MassCenterOverride": "0,0,0",
+          "MassOverride": 0,
+          "MotionEnabled": true,
+          "OverrideMassCenter": false,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        }
+      ]
+    },
+    {
+      "__guid": "b8018b7f-85d9-4504-9439-79d93fad8eaa",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-160.433,0.6,7.31354",
+      "Rotation": "0,0.08628637,0,0.9962704",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "ca1f0376-622e-4bc6-b70f-c767d187196c",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
         }
       ]
     }
