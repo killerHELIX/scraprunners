@@ -2,13 +2,14 @@ using Sandbox;
 using System.ComponentModel.Design;
 public class ProceduralDesertGeneration : Component
 {
-	public int resolution = 1;
-	public int size = 500;
+	public int resolution = 5;
+	public int size = 10;
 	private FastNoiseLite noise = new FastNoiseLite();
-	public float frequency = 10.0f;
+	public float frequency = 1000.0f;
 	public float wavelength;
-	public float factor = 10f;
-	public float factor2 = 100f;
+	public float xyFactor = 100f;
+	public float zFactor = 100f;
+	public float zTranslation = 9f;
 	private Model model { get; set; }
 
 	protected override void OnStart()
@@ -25,38 +26,41 @@ public class ProceduralDesertGeneration : Component
 	{
 		List<Vertex> vertices = new List<Vertex>();
 		List<int> indices = new List<int>();
-		float[,] noiseMatrix = new float[2 * size * resolution, 2 * size * resolution];
-		//noiseMatrix = new float[size * resolution, size * resolution];
+		int dimensionLength = size * resolution;
+		float[,] noiseMatrix = new float[ dimensionLength, dimensionLength ];
 		Vector3 normal = Vector3.Up;
 		Vector3 tangent = Vector3.Forward;
 
 
-		for (int x = -size * resolution; x < size * resolution; x++ )
+		for (int x = 0; x < size * resolution; x++ )
 		{
-			for ( int y = -size * resolution; y < size * resolution; y++ )
+			for ( int y = 0; y < size * resolution; y++ )
 			{
-				float x0 = (float)x * factor / resolution;
-				float y0 = (float)y * factor / resolution;
-				noiseMatrix[x+ (size * resolution), y+ (size * resolution)] = noise.GetNoise(x0 / wavelength, y0 / wavelength);
-				//Log.Info(noiseMatrix[x, y] );
-				float z0 = factor2 * noiseMatrix[x + (size * resolution), y + (size * resolution)];
-				//float z0 = 0.0f;
+				noiseMatrix[x, y] = noise.GetNoise((float)x, (float) y);
+			}
+		}
 
-				float x1 = (float)(x + 1) * factor / resolution;
-				float y1 = (float)(y + 1) * factor / resolution;
-				float z1 = factor2 * noise.GetNoise( x1 / wavelength, y1 / wavelength ); ;
+		for (int x = 0; x < dimensionLength - 1; x++ )
+		{
+			for ( int y = 0; y < dimensionLength - 1; y++ )
+			{
+				float x0 = (float)(x - dimensionLength/2)* xyFactor / resolution;
+				float y0 = (float)(y - dimensionLength / 2) * xyFactor / resolution;
+
+				float x1 = (float)(x + 1) * xyFactor / resolution;
+				float y1 = (float)(y + 1) * xyFactor / resolution;
 
 				//quad
-				Vector3 botLeft = new Vector3(x0, y0, z0);
-				Vector3 botRight = new Vector3(x1, y0, z1);
-				Vector3 topRight = new Vector3(x1, y1, z0);
-				Vector3 topLeft = new Vector3(x0, y1, z1);
-
+				Vector3 botLeft = new Vector3( x0, y0, zFactor * noiseMatrix[x, y] - zTranslation);
+				Vector3 botRight = new Vector3( x1, y0, zFactor * noiseMatrix[x + 1, y] - zTranslation );
+				Vector3 topRight = new Vector3( x1, y1, zFactor * noiseMatrix[x + 1, y + 1] - zTranslation );
+				Vector3 topLeft = new Vector3( x0, y1, zFactor * noiseMatrix[x, y + 1] - zTranslation );
+				Log.Info( botLeft.z );
 				// uv corners
-				Vector4 uvBotLeft = new Vector4(0f, 0f, 0f, 0f);
-				Vector4 uvBotRight = new Vector4(2f, 0f, 0f, 0f );
+				Vector4 uvBotLeft = new Vector4( 0f, 0f, 0f, 0f );
+				Vector4 uvBotRight = new Vector4( 2f, 0f, 0f, 0f );
 				Vector4 uvTopRight = new Vector4( 2f, 2f, 0f, 0f );
-				Vector4 uvTopLeft = new Vector4(0f, 2f, 0f, 0f );
+				Vector4 uvTopLeft = new Vector4( 0f, 2f, 0f, 0f );
 
 				int baseVertexIndex = vertices.Count;
 
@@ -73,6 +77,7 @@ public class ProceduralDesertGeneration : Component
 				indices.Add( baseVertexIndex + 3 );
 			}
 		}
+
 		var material = Material.Load( "materials/sand1.vmat" );
 		var mesh = new Mesh( material );
 

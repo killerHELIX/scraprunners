@@ -138,7 +138,7 @@
       "__guid": "7fd7487f-905a-4c15-8064-28788547a367",
       "Flags": 0,
       "Name": "Player Controller",
-      "Position": "0,0.6,13.20232",
+      "Position": "-27.69659,0,0",
       "Components": [
         {
           "__type": "Sandbox.PlayerController",
@@ -226,12 +226,14 @@
         {
           "__type": "Sandbox.Movement.MoveModeSwim",
           "__guid": "0f4ea477-4b4f-48c4-a0ed-b9bb68ac4fcd",
+          "__enabled": false,
           "Priority": 10,
           "SwimLevel": 0.7
         },
         {
           "__type": "Sandbox.Movement.MoveModeLadder",
           "__guid": "7f567e8d-ba9e-4a96-bb4e-f0345c60b9fe",
+          "__enabled": false,
           "ClimbableTags": "ladder",
           "Priority": 5
         }
@@ -389,8 +391,8 @@
       "__guid": "b8018b7f-85d9-4504-9439-79d93fad8eaa",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-160.433,0.6,7.31354",
-      "Rotation": "0,0.08628637,0,0.9962704",
+      "Position": "-341.9051,0.6,191.9614",
+      "Rotation": "0,0.1279302,0,0.9917832",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
