@@ -475,15 +475,15 @@
             "go": "7ac87626-acd4-466a-b5a5-e7c1d30c36da"
           },
           "IsFirstPerson": true,
-          "MovementSpeed": 2,
-          "ThirdPersonCamOffsets": "256,-15,0",
-          "TurnAxis": {
-            "_type": "gameobject",
-            "go": "0205b24d-c3fb-4169-9d46-f4dab12a70e0"
-          },
+          "ThirdPersonCamOffsets": "180,-64,64",
+          "Weapons": [
+            {
+              "_type": "gameobject",
+              "go": "b4af3512-3fe5-4a6d-878b-ae770c978b63"
+            }
+          ],
           "BrakeForce": 5,
           "Drag": 0.98,
-          "DriftMultiplier": 1.5,
           "EnginePower": 100,
           "Friction": 1,
           "MaxSpeed": 500,
@@ -590,6 +590,38 @@
               "Name": "ExitPosition",
               "Position": "-38.22624,54.41969,14.61699",
               "Enabled": true
+            },
+            {
+              "__guid": "b4af3512-3fe5-4a6d-878b-ae770c978b63",
+              "Flags": 0,
+              "Name": "Cannon",
+              "Position": "-38.58778,0,87.83356",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.ModelRenderer",
+                  "__guid": "ca98fe89-d3f5-4568-9530-3593bc9a8517",
+                  "BodyGroups": 18446744073709551615,
+                  "CreateAttachments": false,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/blockout/truck/truck_cannon.vmdl",
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null,
+                  "RenderOptions": {
+                    "GameLayer": true,
+                    "OverlayLayer": false,
+                    "BloomLayer": false,
+                    "AfterUILayer": false
+                  },
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
             },
             {
               "__guid": "0205b24d-c3fb-4169-9d46-f4dab12a70e0",

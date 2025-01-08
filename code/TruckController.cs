@@ -11,6 +11,7 @@ public class TruckController : Component, IPressable
 	[Property] private bool IsFirstPerson = true;
 
 	[Property] public GameObject ExitPosition;
+	[Property] public List<GameObject> Weapons;
 
 	[Property] public float EnginePower { get; set; } = 100f; // Force applied for acceleration
 	[Property] public float MaxSpeed { get; set; } = 500f; // Maximum speed in units per second
@@ -61,17 +62,33 @@ public class TruckController : Component, IPressable
 			}
 
 			PositionTruck();
+			PositionWeapons();
 
-			var thirdPersonDebugPos = WorldPosition + Vector3.Up * 100;
-			var firstPersonDebugPos = FirstPersonCam.WorldPosition 
-				+ FirstPersonCam.WorldRotation.Forward * 100
-				+ FirstPersonCam.WorldRotation.Right * 30
-				+ FirstPersonCam.WorldRotation.Down * 20;
-			DebugOverlay.Text( thirdPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
-			DebugOverlay.Text( firstPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
+			AddDebugOverlays();
 		}
 
 		// Do nothing without a driver!
+	}
+
+	private void AddDebugOverlays()
+	{
+		var thirdPersonDebugPos = WorldPosition + Vector3.Up * 100;
+		var firstPersonDebugPos = FirstPersonCam.WorldPosition
+			+ FirstPersonCam.WorldRotation.Forward * 100
+			+ FirstPersonCam.WorldRotation.Right * 30
+			+ FirstPersonCam.WorldRotation.Down * 20;
+		DebugOverlay.Text( thirdPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
+		DebugOverlay.Text( firstPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
+	}
+
+	private void PositionWeapons()
+	{
+		foreach ( GameObject weapon in Weapons )
+		{
+			var rot = weapon.WorldRotation;
+			weapon.WorldRotation = Rotation.Lerp(rot, Camera.WorldRotation, 0.1f, true);
+
+		}
 	}
 
 	protected override void OnUpdate()
@@ -167,7 +184,7 @@ public class TruckController : Component, IPressable
 		// Input handling
 		var forwardInput = Input.AnalogMove.x;
 		var turnInput = (currentSpeed >= 0) ? Input.AnalogMove.y : Input.AnalogMove.y * -1; // Invert turning when going backwards.
-		TurnSpeedFactor = (turnInput == 0) ? TurnSpeedFactor : Math.Clamp( TurnSpeedFactor + 0.05f, 0, 1 );
+		TurnSpeedFactor = (turnInput == 0) ? TurnSpeedFactor : Math.Clamp( TurnSpeedFactor + 0.02f, 0, 1 );
 
 		// Acceleration and engine power
 		if ( forwardInput != 0 )
@@ -184,7 +201,7 @@ public class TruckController : Component, IPressable
 		currentSpeed = currentSpeed.Clamp( -MaxSpeed, MaxSpeed );
 
 		// Only allow turning if moving
-		if ( Math.Abs( currentSpeed ) > 0f )
+		if ( Math.Abs( currentSpeed ) > 10f )
 		{
 			var turnAngle = turnInput * TurnSpeed * TurnSpeedFactor * Time.Delta;
 
@@ -209,6 +226,6 @@ public class TruckController : Component, IPressable
 
 		// Always reduce turn input to 0 
 		DebugLog( $"{TurnSpeedFactor}" );
-		TurnSpeedFactor = Math.Clamp( TurnSpeedFactor - 0.04f, 0, 1 );
+		TurnSpeedFactor = Math.Clamp( TurnSpeedFactor - 0.01f, 0, 1 );
 	}
 }
