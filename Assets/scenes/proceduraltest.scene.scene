@@ -9,7 +9,11 @@
       "Components": [
         {
           "__type": "ProceduralDesertGeneration",
-          "__guid": "f98b84a7-df44-42c7-9d60-ce86b885d2bf"
+          "__guid": "f98b84a7-df44-42c7-9d60-ce86b885d2bf",
+          "shrub": {
+            "_type": "gameobject",
+            "go": "d657ce91-3095-4fe1-a164-8a85e989310d"
+          }
         }
       ]
     },
@@ -17,7 +21,7 @@
       "__guid": "78704ce8-8df1-4e15-b10c-dfd7daa5f6d0",
       "Flags": 0,
       "Name": "Sun",
-      "Position": "-79.55692,-96.39731,126.1826",
+      "Rotation": "0.09229595,0.09229595,-0.7010573,0.7010574",
       "Tags": "light_directional,light",
       "Enabled": true,
       "Components": [
@@ -28,7 +32,7 @@
           "FogStrength": 1,
           "LightColor": "0.91373,0.98039,1,1",
           "Shadows": true,
-          "SkyColor": "0,0,0,0"
+          "SkyColor": "0.93488,0.74834,0.59572,0"
         }
       ]
     },
@@ -85,7 +89,7 @@
       "__guid": "9c084af7-fee4-4d95-8d8d-84727b866643",
       "Flags": 0,
       "Name": "Cube",
-      "Position": "0,0,113.1298",
+      "Position": "0,268.2009,113.1298",
       "Components": [
         {
           "__type": "Sandbox.ModelRenderer",
@@ -190,6 +194,7 @@
           "UseAnimatorControls": true,
           "UseButton": "use",
           "UseCameraControls": true,
+          "UseFovFromPreferences": true,
           "UseInputControls": true,
           "WalkSpeed": 110
         },
@@ -391,8 +396,7 @@
       "__guid": "b8018b7f-85d9-4504-9439-79d93fad8eaa",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-341.9051,0.6,191.9614",
-      "Rotation": "0,0.1279302,0,0.9917832",
+      "Position": "-1000,0,0",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -412,8 +416,20 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        },
+        {
+          "__type": "CameraController",
+          "__guid": "e7f8ff92-eadf-4e37-899e-c74eeb24457c"
         }
       ]
+    },
+    {
+      "__guid": "d657ce91-3095-4fe1-a164-8a85e989310d",
+      "Flags": 0,
+      "Name": "JakeShrub",
+      "Enabled": true,
+      "__Prefab": "models/blockout/environment/shrubs/jakeshrub.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {

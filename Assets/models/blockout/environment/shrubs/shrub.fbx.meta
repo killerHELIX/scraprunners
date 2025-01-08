@@ -1,0 +1,20 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "Shrub",
+      "Type": "fbx",
+      "Org": "local",
+      "Ident": "shrub",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "models/blockout/environment/shrubs/shrub.fbx"
+      }
+    }
+  }
+}

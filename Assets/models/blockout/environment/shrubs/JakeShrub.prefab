@@ -1,0 +1,32 @@
+{
+  "RootObject": {
+    "__guid": "d657ce91-3095-4fe1-a164-8a85e989310d",
+    "Flags": 0,
+    "Name": "JakeShrub",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "406118a8-a9a7-4b7c-bbc3-e2b0434f0005",
+        "BodyGroups": 18446744073709551615,
+        "CreateAttachments": false,
+        "Model": "models/blockout/environment/shrubs/shrubmodel.vmdl",
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

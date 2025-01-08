@@ -120,7 +120,7 @@ public class FastNoiseLite
 		DefaultOpenSimplex2
 	};
 
-	private int mSeed = 1337;
+	public int mSeed = 1337;
 	private float mFrequency = 0.01f;
 	private NoiseType mNoiseType = NoiseType.OpenSimplex2;
 	private RotationType3D mRotationType3D = RotationType3D.None;
