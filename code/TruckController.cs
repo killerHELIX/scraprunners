@@ -1,6 +1,4 @@
 using System;
-using Sandbox;
-using Sandbox.ModelEditor;
 using static Sandbox.Component;
 
 namespace scraprunners;
@@ -12,10 +10,23 @@ public class TruckController : Component, IPressable
 
 	[Property] private bool IsFirstPerson = true;
 
-	[Property] public float MovementSpeed;
-
 	[Property] public GameObject ExitPosition;
-	[Property] public GameObject TurnAxis;
+
+	[Property] public float EnginePower { get; set; } = 100f; // Force applied for acceleration
+	[Property] public float MaxSpeed { get; set; } = 500f; // Maximum speed in units per second
+	[Property] public float TurnSpeed { get; set; } = 100f; // Base degrees per second
+	[Property] public float BrakeForce { get; set; } = 1f; // Braking force
+	[Property] public float Friction { get; set; } = 1f; // Road friction
+	[Property] public float Drag { get; set; } = 0.975f; // Air resistance
+	[Property] public float SuspensionStrength { get; set; } = 100f; // Suspension strength
+	[Property] public float SuspensionDamping { get; set; } = 100f; // Suspension damping
+
+	private float currentSpeed = 0f;
+	private Vector3 velocity = Vector3.Zero;
+	private Vector3 suspensionOffset = Vector3.Zero;
+
+	private float TurnSpeedFactor = 0f;
+
 
 	public bool Waiting = false;
 
@@ -49,11 +60,15 @@ public class TruckController : Component, IPressable
 				HandleViewInput();
 			}
 
-			// PositionCamera();
-			// PositionPlayer();
-
 			PositionTruck();
 
+			var thirdPersonDebugPos = WorldPosition + Vector3.Up * 100;
+			var firstPersonDebugPos = FirstPersonCam.WorldPosition 
+				+ FirstPersonCam.WorldRotation.Forward * 100
+				+ FirstPersonCam.WorldRotation.Right * 30
+				+ FirstPersonCam.WorldRotation.Down * 20;
+			DebugOverlay.Text( thirdPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
+			DebugOverlay.Text( firstPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
 		}
 
 		// Do nothing without a driver!
@@ -91,29 +106,12 @@ public class TruckController : Component, IPressable
 		}
 	}
 
-	protected void PositionPlayer()
-	{
-		DebugLog( "" + Input.AnalogMove );
-		// var wishPosition = (Input.AnalogMove * EyeAngles.ToRotation()).WithZ( 0f ).Normal;
-		// WorldPosition += wishPosition * MovementSpeed;
-		// WorldRotation = EyeAngles.WithRoll( 0 ).WithPitch( 0 ).ToRotation();
-
-		var forward = WorldRotation.Forward * Input.AnalogMove.x;
-		// var left = WorldRotation.Left * Input.AnalogMove.y;
-
-		WorldPosition += forward.Normal * MovementSpeed;
-		// WorldRotation = WorldRotation.RotateAroundAxis(Vector3.Up, Input.AnalogMove.y * 1.0f);
-		WorldRotation = TurnAxis.WorldRotation.RotateAroundAxis( Vector3.Up, Input.AnalogMove.y * 1.0f );
-	}
-
 	protected void PositionCamera()
 	{
 		EyeAngles += Input.AnalogLook;
 		EyeAngles.roll = 0;
 		EyeAngles.pitch = EyeAngles.pitch.Clamp( -89.9f, 89.9f );
 		Camera.WorldRotation = Rotation.From( EyeAngles );
-
-		// FirstPersonPosition.WorldPosition = WorldPosition + FirstPersonCam;
 
 		if ( IsFirstPerson )
 		{
@@ -136,11 +134,6 @@ public class TruckController : Component, IPressable
 
 			}
 		}
-
-
-
-
-		// Camera.WorldRotation = WorldRotation;
 	}
 
 	public void Drive( GameObject driver )
@@ -168,27 +161,13 @@ public class TruckController : Component, IPressable
 		Log.Info( this + ": " + msg );
 	}
 
-	// Define properties for advanced vehicle physics
-	[Property] public float EnginePower { get; set; } = 1500f; // Force applied for acceleration
-	[Property] public float MaxSpeed { get; set; } = 2200f; // Maximum speed in units per second
-	[Property] public float TurnSpeed { get; set; } = 70f; // Base degrees per second
-	[Property] public float BrakeForce { get; set; } = 6000f; // Braking force
-	[Property] public float Friction { get; set; } = 0.96f; // Road friction
-	[Property] public float Drag { get; set; } = 0.99f; // Air resistance
-	[Property] public float SuspensionStrength { get; set; } = 300f; // Suspension strength
-	[Property] public float SuspensionDamping { get; set; } = 50f; // Suspension damping
-
-	private float currentSpeed = 0f;
-	private Vector3 velocity = Vector3.Zero;
-	private Vector3 angularVelocity = Vector3.Zero;
-	private Vector3 suspensionOffset = Vector3.Zero;
-
 	public void PositionTruck()
 	{
 
 		// Input handling
 		var forwardInput = Input.AnalogMove.x;
 		var turnInput = (currentSpeed >= 0) ? Input.AnalogMove.y : Input.AnalogMove.y * -1; // Invert turning when going backwards.
+		TurnSpeedFactor = (turnInput == 0) ? TurnSpeedFactor : Math.Clamp( TurnSpeedFactor + 0.05f, 0, 1 );
 
 		// Acceleration and engine power
 		if ( forwardInput != 0 )
@@ -204,14 +183,13 @@ public class TruckController : Component, IPressable
 		// Clamp speed
 		currentSpeed = currentSpeed.Clamp( -MaxSpeed, MaxSpeed );
 
-		// Apply speed-dependent turning
-		if ( Math.Abs( currentSpeed ) > 10f )
+		// Only allow turning if moving
+		if ( Math.Abs( currentSpeed ) > 0f )
 		{
-			float speedFactor = (1 - (Math.Abs( currentSpeed ) / MaxSpeed)).Clamp( 0.2f, 1f ); // Turn efficiency based on speed
-			var turnAngle = turnInput * TurnSpeed * speedFactor * Time.Delta;
-			angularVelocity = new Vector3( 0, turnAngle, 0 );
+			var turnAngle = turnInput * TurnSpeed * TurnSpeedFactor * Time.Delta;
+
 			WorldRotation *= Rotation.FromYaw( turnAngle );
-			// Camera.WorldRotation *= Rotation.FromYaw(turnAngle);
+			EyeAngles += Rotation.FromYaw( turnAngle ).Angles();
 		}
 
 		// Simulate suspension
@@ -221,16 +199,16 @@ public class TruckController : Component, IPressable
 		velocity = WorldRotation.Forward * currentSpeed;
 		velocity *= Friction; // Road friction
 
-		// Apply gravity
-		// velocity -= Vector3.Up * Gravity * Time.Delta;
-
 		WorldPosition += velocity * Time.Delta + suspensionOffset;
 
 		// Apply braking
-		if ( Input.Pressed( "jump" ) ) // Example: Space for braking
+		if ( Input.Down( "jump" ) ) // Example: Space for braking
 		{
 			currentSpeed = MathX.Lerp( currentSpeed, 0, BrakeForce * Time.Delta );
 		}
 
+		// Always reduce turn input to 0 
+		DebugLog( $"{TurnSpeedFactor}" );
+		TurnSpeedFactor = Math.Clamp( TurnSpeedFactor - 0.04f, 0, 1 );
 	}
 }
