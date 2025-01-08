@@ -86,7 +86,7 @@ public class TruckController : Component, IPressable
 		foreach ( GameObject weapon in Weapons )
 		{
 			var rot = weapon.WorldRotation;
-			weapon.WorldRotation = Rotation.Lerp(rot, Camera.WorldRotation, 0.1f, true);
+			weapon.WorldRotation = Rotation.Lerp( rot, Camera.WorldRotation, 0.1f, true );
 
 		}
 	}
@@ -170,6 +170,12 @@ public class TruckController : Component, IPressable
 		Driver.WorldRotation = Camera.WorldRotation;
 		Driver.Enabled = true;
 
+		// Reset Weapons
+		foreach (GameObject weapon in Weapons)
+		{
+			weapon.WorldRotation = WorldRotation;
+		}
+
 		HasDriver = false;
 	}
 
@@ -225,7 +231,6 @@ public class TruckController : Component, IPressable
 		}
 
 		// Always reduce turn input to 0 
-		DebugLog( $"{TurnSpeedFactor}" );
 		TurnSpeedFactor = Math.Clamp( TurnSpeedFactor - 0.01f, 0, 1 );
 	}
 }

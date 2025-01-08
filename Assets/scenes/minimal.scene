@@ -474,7 +474,7 @@
             "_type": "gameobject",
             "go": "7ac87626-acd4-466a-b5a5-e7c1d30c36da"
           },
-          "IsFirstPerson": true,
+          "IsFirstPerson": false,
           "ThirdPersonCamOffsets": "180,-64,64",
           "Weapons": [
             {
@@ -693,7 +693,7 @@
           "RunSpeed": 320,
           "ShowColliderComponents": false,
           "ShowRigidbodyComponent": false,
-          "ThirdPerson": true,
+          "ThirdPerson": false,
           "ToggleCameraModeButton": "view",
           "UseAnimatorControls": true,
           "UseButton": "use",
