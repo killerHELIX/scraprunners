@@ -25,8 +25,7 @@ public class TruckController : Component, IPressable
 	[Property, Feature( "References" )] public PanelComponent Hud;
 
 	private float currentSpeed = 0f;
-	private Vector3 velocity = Vector3.Zero;
-	private Vector3 suspensionOffset = Vector3.Zero;
+	private Vector3 Velocity = Vector3.Zero;
 
 	private float TurnDirection = 0f;
 
@@ -204,19 +203,20 @@ public class TruckController : Component, IPressable
 
 	public void PositionTruck()
 	{
+		DebugLog($"{TurnDirection}");
 
-		// Input handling
+		// Get inputs from AnalogMove for controller support.
 		var forwardInput = Input.AnalogMove.x;
 		var turnInput = (currentSpeed >= 0) ? Input.AnalogMove.y : Input.AnalogMove.y * -1; // Invert turning when going backwards.  
-																							// TurnSpeedFactor = (turnInput == 0) ? TurnSpeedFactor : Math.Clamp( TurnSpeedFactor + 0.02f, 0, 1 );
-																							// turnInput /= 10; // Convert to a number below 1.00.
+
+		// Calculate the "turn direction", a moving scale of how hard the player is turning left or right.
 		TurnDirection = Math.Clamp( TurnDirection + turnInput * TurnHandling, -1 * TurnSpeed, TurnSpeed ); // Invert turning when going backwards.
-																										   // var turnSpeedFactor = (Math.Abs( currentSpeed ) / MaxSpeed).Clamp( 0.2f, 1f ); // Turn efficiency based on speed (slower at slower speed)
-																										   // TurnDirection *= turnSpeedFactor;
 
-		DebugLog( $"{TurnDirection}" );
 
-		// Acceleration and engine power
+
+		// Simulate forward speed. 
+		// Forward/backward based on engine power if pressing foward or backward.
+		// Slowly decelerate based on drag otherwise.
 		if ( forwardInput != 0 )
 		{
 			currentSpeed += forwardInput * EnginePower * Time.Delta;
@@ -227,10 +227,15 @@ public class TruckController : Component, IPressable
 			currentSpeed *= Drag;
 		}
 
-		// Clamp speed
+		// Clamp simulated speed to maximum value.
 		currentSpeed = currentSpeed.Clamp( -MaxSpeed, MaxSpeed );
 
-		// Only allow turning if moving
+		// Update velocity/position based on current speed.
+		Velocity = WorldRotation.Forward * currentSpeed;
+		Velocity *= Friction; // Road friction
+		WorldPosition += Velocity * Time.Delta;
+
+		// Now simulate turning. Don't allow turning while stationary (under 10.0 speed)
 		if ( Math.Abs( currentSpeed ) > 10f )
 		{
 			var turnAngle = TurnDirection * Time.Delta;
@@ -240,38 +245,35 @@ public class TruckController : Component, IPressable
 		}
 		else // not moving
 		{
-
 			TurnDirection = MathX.Lerp( TurnDirection, 0f, 0.3f, true );
-
 		}
 
-		// Simulate suspension
-		suspensionOffset = Vector3.Lerp( suspensionOffset, Vector3.Zero, SuspensionDamping * Time.Delta );
-
-		// Update velocity and position
-		velocity = WorldRotation.Forward * currentSpeed;
-		velocity *= Friction; // Road friction
-
-		WorldPosition += velocity * Time.Delta + suspensionOffset;
-
-		// Apply braking
+		// Simulate braking.
 		if ( Input.Down( "jump" ) ) // Example: Space for braking
 		{
 			currentSpeed = MathX.Lerp( currentSpeed, 0, BrakeForce * Time.Delta );
 		}
 
-		// Always reduce turn input to 0 
-		if ( TurnDirection > 0 )
-		{
-			// TurnDirection -= TurnCentering * turnSpeedFactor;
-			TurnDirection -= TurnCentering;
-		}
-		else
-		{
-			// TurnDirection += TurnCentering * turnSpeedFactor;
-			TurnDirection += TurnCentering;
-		}
+		// Simulate turn direction always leveling out back to zero like real steering.
 
-		TurnDirection = MathX.AlmostEqual( TurnDirection, 0, TurnCentering ) ? 0 : TurnDirection; // Soft-lock to zero when close
+		// If the turn centering overshoots 0 then it will infinitely bounce between the lowest non-zero left/right turn direction value.
+		// If this is detected, just clamp the value to 0 and be done with it.
+		if (turnInput == 0) // Not actively turning left/right
+		{
+			if ( TurnDirection > 0 ) // Turning Left
+			{
+
+				var turnCentered = TurnDirection - TurnCentering;
+				bool calcWouldReverseTurn = turnCentered < 0;
+				TurnDirection = calcWouldReverseTurn ? 0 : turnCentered;
+
+			}
+			else // Turning Right
+			{
+				var turnCentered = TurnDirection + TurnCentering;
+				bool calcWouldReverseTurn = turnCentered > 0;
+				TurnDirection = calcWouldReverseTurn ? 0 : turnCentered;
+			}
+		}
 	}
 }

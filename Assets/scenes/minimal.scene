@@ -481,7 +481,7 @@
             "component_type": "TruckHud"
           },
           "IsFirstPerson": false,
-          "ThirdPersonCamOffsets": "180,-64,64",
+          "ThirdPersonCamOffsets": "220,-64,64",
           "Weapons": [
             {
               "_type": "gameobject",
@@ -501,9 +501,9 @@
           "OnComponentUpdate": null,
           "SuspensionDamping": 100,
           "SuspensionStrength": 100,
-          "TurnCentering": 2.9,
-          "TurnHandling": 6,
-          "TurnSpeed": 100
+          "TurnCentering": 1.5,
+          "TurnHandling": 4,
+          "TurnSpeed": 80
         }
       ],
       "Children": [
