@@ -113,7 +113,7 @@
       "__guid": "9c084af7-fee4-4d95-8d8d-84727b866643",
       "Flags": 0,
       "Name": "Cube",
-      "Position": "0,268.2009,113.1298",
+      "Position": "0,0,223.7968",
       "Components": [
         {
           "__type": "Sandbox.ModelRenderer",
@@ -197,6 +197,7 @@
         {
           "__type": "Sandbox.PlayerController",
           "__guid": "43474325-9df5-409a-9699-f772906c2f8d",
+          "AccelerationTime": 0,
           "AimStrengthBody": 1,
           "AimStrengthEyes": 1,
           "AimStrengthHead": 1,
@@ -216,6 +217,7 @@
             "_type": "gameobject",
             "go": "735c3b70-2be1-4db3-95b0-7867627e1e8e"
           },
+          "DeaccelerationTime": 0,
           "DuckedHeight": 36,
           "DuckedSpeed": 70,
           "EnableFootstepSounds": true,
@@ -586,7 +588,6 @@
       "__guid": "d657ce91-3095-4fe1-a164-8a85e989310d",
       "Flags": 0,
       "Name": "JakeShrub",
-      "Enabled": true,
       "__Prefab": "models/blockout/environment/shrubs/jakeshrub.prefab",
       "__PrefabVariables": {}
     },
@@ -606,7 +607,7 @@
           "chunkSize": 256,
           "gridFactor": 10,
           "gridPosition": "0,0",
-          "heightFactor": 100,
+          "heightFactor": 200,
           "heightTranslation": 9,
           "lod": 1,
           "materials": [
@@ -615,6 +616,12 @@
             "materials/sand3.vmat",
             "materials/sand4.vmat"
           ],
+          "player": {
+            "_type": "gameobject",
+            "go": "b8018b7f-85d9-4504-9439-79d93fad8eaa"
+          },
+          "totalAreaHeight": 0,
+          "totalAreaWidth": 0,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,

@@ -1,6 +1,6 @@
 using System;
 
-public class TerrainChunk
+public class TerrainChunk : Component
 {
 	//public Material material { get; private set; }
 	public Vector2 gridPosition { get; private set; }
@@ -12,23 +12,30 @@ public class TerrainChunk
 	private Model model = null;
 
 	//manually changing the scale and position of the grid
-	public float xyFactor { get; private set; }
-	public float zFactor { get; private set; }
-	public float zTranslation { get; private set; }
+	public float gridFactor { get; private set; }
+	public float heightFactor { get; private set; }
+	public float heightTranslation { get; private set; }
 
 	//materials
 	public List<Material> materials { get; private set; }
 
-	public void Initialize(Vector2 GridPosition, int ChunkSize, int LOD, int Seed, float XYFactor, float ZFactor, float ZTranslation, List<Material> Materials )
+	protected override void OnStart()
 	{
-		gridPosition = GridPosition;
-		chunkSize = ChunkSize;
-		lod = LOD;
-		seed = Seed;
-		xyFactor = XYFactor;
-		zFactor = ZFactor;
-		zTranslation = ZTranslation;
-		materials = Materials;
+		base.OnStart();
+		Initialize();
+	}
+
+	public void Initialize()
+	{
+		GameObject terrainManager = (GameObject)Scene.Directory.FindByName( "ProceduralTerrainManager" );
+		gridPosition = this.WorldPosition;
+		chunkSize = terrainManager.GetComponent<ProceduralTerrainManager>().chunkSize;
+		lod = terrainManager.GetComponent<ProceduralTerrainManager>().lod;
+		seed = terrainManager.GetComponent<ProceduralTerrainManager>().seed;
+		gridFactor = terrainManager.GetComponent<ProceduralTerrainManager>().gridFactor;
+		heightFactor = terrainManager.GetComponent<ProceduralTerrainManager>().heightFactor;
+		heightTranslation = terrainManager.GetComponent<ProceduralTerrainManager>().heightTranslation;
+		materials = terrainManager.GetComponent<ProceduralTerrainManager>().materials;
 
 		noise.SetNoiseType( FastNoiseLite.NoiseType.Perlin );
 		noise.mSeed = seed;
@@ -51,11 +58,11 @@ public class TerrainChunk
 		{
 			for(int y = 0; y < chunkSize - 1; y+=lod )
 			{
-				float x0 = (gridPosition.x + x) * xyFactor;
-				float y0 = (gridPosition.y + y) * xyFactor;
+				float x0 = (gridPosition.x + x - chunkSize * 0.5f) * gridFactor;
+				float y0 = (gridPosition.y + y - chunkSize * 0.5f) * gridFactor;
 						   
-				float x1 = (gridPosition.x + x + lod) * xyFactor;
-				float y1 = (gridPosition.y + y + lod) * xyFactor;
+				float x1 = (gridPosition.x + x + lod - chunkSize * 0.5f) * gridFactor;
+				float y1 = (gridPosition.y + y + lod - chunkSize * 0.5f) * gridFactor;
 
 				//cringe
 				if ( !coordinateNoise.ContainsKey( new Vector2( x, y ) ) )
@@ -76,10 +83,10 @@ public class TerrainChunk
 				}
 
 				//quad
-				Vector3 botLeft = new Vector3( x0, y0, zFactor * coordinateNoise[new Vector2( x, y )] - zTranslation );
-				Vector3 botRight = new Vector3( x1, y0, zFactor * coordinateNoise[new Vector2( x + lod, y )] - zTranslation );
-				Vector3 topRight = new Vector3( x1, y1, zFactor * coordinateNoise[new Vector2( x + lod, y + lod )] - zTranslation );
-				Vector3 topLeft = new Vector3( x0, y1, zFactor * coordinateNoise[new Vector2( x, y + lod )] - zTranslation );
+				Vector3 botLeft = new Vector3( x0, y0, heightFactor * coordinateNoise[new Vector2( x, y )] - heightTranslation );
+				Vector3 botRight = new Vector3( x1, y0, heightFactor * coordinateNoise[new Vector2( x + lod, y )] - heightTranslation );
+				Vector3 topRight = new Vector3( x1, y1, heightFactor * coordinateNoise[new Vector2( x + lod, y + lod )] - heightTranslation );
+				Vector3 topLeft = new Vector3( x0, y1, heightFactor * coordinateNoise[new Vector2( x, y + lod )] - heightTranslation );
 
 				// uv corners
 				Vector4 uvBotLeft = new Vector4( 0f, 0f, 0f, 0f );
@@ -114,9 +121,9 @@ public class TerrainChunk
 			}
 		}
 
-		Log.Info( vertices.Length );
-		Log.Info( indices.Count );
-		Log.Info( vertexPositions.Length );
+		//Log.Info( vertices.Length );
+		//Log.Info( indices.Count );
+		//Log.Info( vertexPositions.Length );
 		Material material = AssignMaterial();
 		var mesh = new Mesh( material );
 
