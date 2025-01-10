@@ -5,24 +5,24 @@ namespace scraprunners;
 
 public class TruckController : Component, IPressable
 {
-	[Property] public GameObject FirstPersonCam;
-	[Property] public Vector3 ThirdPersonCamOffsets;
+	[Property, Feature( "General" )] public Vector3 ThirdPersonCamOffsets;
+	[Property, Feature( "General" )] private bool IsFirstPerson = true;
 
-	[Property] private bool IsFirstPerson = true;
+	[Property, Feature( "Stats" )] public float EnginePower { get; set; } = 100f; // Force applied for acceleration
+	[Property, Feature( "Stats" )] public float MaxSpeed { get; set; } = 500f; // Maximum speed in units per second
+	[Property, Feature( "Stats" )] public float TurnSpeed { get; set; } = 100f; // Base degrees per second
+	[Property, Feature( "Stats" )] public float TurnHandling { get; set; } = 0.05f; // Base degrees per second
+	[Property, Feature( "Stats" )] public float TurnCentering { get; set; } = 0.05f; // Base degrees per second
+	[Property, Feature( "Stats" )] public float BrakeForce { get; set; } = 1f; // Braking force
+	[Property, Feature( "Stats" )] public float Friction { get; set; } = 1f; // Road friction
+	[Property, Feature( "Stats" )] public float Drag { get; set; } = 0.975f; // Air resistance
+	[Property, Feature( "Stats" )] public float SuspensionStrength { get; set; } = 100f; // Suspension strength
+	[Property, Feature( "Stats" )] public float SuspensionDamping { get; set; } = 100f; // Suspension damping
 
-	[Property] public GameObject ExitPosition;
-	[Property] public List<GameObject> Weapons;
-
-	[Property] public float EnginePower { get; set; } = 100f; // Force applied for acceleration
-	[Property] public float MaxSpeed { get; set; } = 500f; // Maximum speed in units per second
-	[Property] public float TurnSpeed { get; set; } = 100f; // Base degrees per second
-	[Property] public float TurnHandling { get; set; } = 0.05f; // Base degrees per second
-	[Property] public float TurnCentering { get; set; } = 0.05f; // Base degrees per second
-	[Property] public float BrakeForce { get; set; } = 1f; // Braking force
-	[Property] public float Friction { get; set; } = 1f; // Road friction
-	[Property] public float Drag { get; set; } = 0.975f; // Air resistance
-	[Property] public float SuspensionStrength { get; set; } = 100f; // Suspension strength
-	[Property] public float SuspensionDamping { get; set; } = 100f; // Suspension damping
+	[Property, Feature( "References" )] public GameObject FirstPersonCam;
+	[Property, Feature( "References" )] public GameObject ExitPosition;
+	[Property, Feature( "References" )] public List<GameObject> Weapons;
+	[Property, Feature( "References" )] public PanelComponent Hud;
 
 	private float currentSpeed = 0f;
 	private Vector3 velocity = Vector3.Zero;
@@ -172,10 +172,10 @@ public class TruckController : Component, IPressable
 	public void Drive( GameObject driver )
 	{
 		Driver = driver;
-
 		Driver.Enabled = false;
-
 		HasDriver = true;
+
+		Hud.Enabled = true;
 
 		// Wait();
 	}
@@ -191,6 +191,8 @@ public class TruckController : Component, IPressable
 		{
 			weapon.WorldRotation = WorldRotation;
 		}
+
+		Hud.Enabled = false;
 
 		HasDriver = false;
 	}
@@ -239,7 +241,7 @@ public class TruckController : Component, IPressable
 		else // not moving
 		{
 
-			TurnDirection = MathX.Lerp(TurnDirection, 0f, 0.3f, true);
+			TurnDirection = MathX.Lerp( TurnDirection, 0f, 0.3f, true );
 
 		}
 

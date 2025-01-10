@@ -1,0 +1,44 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+@attribute [StyleSheet("TruckHud.razor.scss")]
+
+<root>
+	<div class="title">@MyStringValue</div>
+</root>
+
+<style>
+	TruckHud
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #444;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
+		border-radius: 20px;
+
+		.title
+		{
+			font-size: 25px;
+			font-family: Poppins;
+			color: #fff;
+		}
+	}
+</style>
+
+@code
+{
+
+	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( MyStringValue );
+}

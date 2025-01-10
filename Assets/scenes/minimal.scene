@@ -474,6 +474,12 @@
             "_type": "gameobject",
             "go": "7ac87626-acd4-466a-b5a5-e7c1d30c36da"
           },
+          "Hud": {
+            "_type": "component",
+            "component_id": "4b6f1e9b-d1e4-45ae-8fee-22bd56777d1a",
+            "go": "f8997521-fecd-4e05-8c2d-2835c70bcde0",
+            "component_type": "TruckHud"
+          },
           "IsFirstPerson": false,
           "ThirdPersonCamOffsets": "180,-64,64",
           "Weapons": [
@@ -495,8 +501,8 @@
           "OnComponentUpdate": null,
           "SuspensionDamping": 100,
           "SuspensionStrength": 100,
-          "TurnCentering": 4,
-          "TurnHandling": 10,
+          "TurnCentering": 2.9,
+          "TurnHandling": 6,
           "TurnSpeed": 100
         }
       ],
@@ -803,7 +809,7 @@
               "Sequence": {
                 "Name": null
               },
-              "Tint": "1,1,1,1",
+              "Tint": "1,0.67264,0.52093,1",
               "UseAnimGraph": true
             }
           ]
@@ -913,6 +919,42 @@
           "Static": false,
           "Surface": null,
           "SurfaceVelocity": "0,0,0"
+        }
+      ]
+    },
+    {
+      "__guid": "f8997521-fecd-4e05-8c2d-2835c70bcde0",
+      "Flags": 0,
+      "Name": "HUD",
+      "Position": "-4.402845,9.19458,-1.568069",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "53d54854-fc85-4124-87fd-dbbaa04436d7",
+          "AutoScreenScale": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "ZIndex": 100
+        },
+        {
+          "__type": "Sandbox.TruckHud",
+          "__guid": "4b6f1e9b-d1e4-45ae-8fee-22bd56777d1a",
+          "__enabled": false,
+          "MyStringValue": "Hello World!",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ]
     }
