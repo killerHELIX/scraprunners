@@ -1,0 +1,27 @@
+{
+  "RootObject": {
+    "__guid": "5956298c-c442-4360-95fa-ed338ba6c3f1",
+    "Flags": 0,
+    "Name": "ChunkSpawner",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "TerrainChunk",
+        "__guid": "b2da4714-d37f-41e1-b3d3-c64f60e3ba3d",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

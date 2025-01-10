@@ -12,7 +12,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "pngs/smooth-sand-dunes-1024x1024.png"
+	TextureColor "materials/deserttextures/desert_sand_sfilxqh_2k/desert_sand_sfilxqh_2k_basecolor.jpg"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -24,11 +24,11 @@ Layer0
 	g_flMetalness "0.000"
 
 	//---- Normal ----
-	TextureNormal "materials/default/default_normal.tga"
+	TextureNormal "materials/deserttextures/desert_sand_sfilxqh_2k/desert_sand_sfilxqh_2k_bump.jpg"
 
 	//---- Roughness ----
 	g_flRoughnessScaleFactor "1.000"
-	TextureRoughness "materials/default/default_rough.tga"
+	TextureRoughness "materials/deserttextures/desert_sand_sfilxqh_2k/desert_sand_sfilxqh_2k_roughness.jpg"
 
 	//---- Texture Coordinates ----
 	g_vTexCoordOffset "[0.000 0.000]"
