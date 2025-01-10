@@ -628,6 +628,18 @@
                   },
                   "RenderType": "On",
                   "Tint": "1,1,1,1"
+                },
+                {
+                  "__type": "scraprunners.TruckCannon",
+                  "__guid": "a0f67376-6476-4f55-b09f-8ce06554eda8",
+                  "FireRate": 1,
+                  "Name": "Cannon",
+                  "OnComponentDestroy": null,
+                  "OnComponentDisabled": null,
+                  "OnComponentEnabled": null,
+                  "OnComponentFixedUpdate": null,
+                  "OnComponentStart": null,
+                  "OnComponentUpdate": null
                 }
               ]
             },

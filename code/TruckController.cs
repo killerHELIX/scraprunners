@@ -89,9 +89,15 @@ public class TruckController : Component, IPressable
 
 	private void HandleFireInput()
 	{
-		if ( Input.Pressed( "attack1" ) )
+		if ( Input.Down( "attack1" ) )
 		{
-			DebugLog( "Fire" );
+			if (!Weapons.Any()) return;
+
+			var component = Weapons.First().GetComponents<TruckWeapon>();
+			if (!component.Any()) return;
+
+			var weapon = component.First();
+			weapon.Fire();
 		}
 	}
 

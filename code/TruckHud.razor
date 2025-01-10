@@ -6,7 +6,7 @@
 
 
 <root>
-	@* <div class="ref"></div> *@
+	<div class="ref"></div>
 	<div class="health">
 		@* <div class="max-health"/>
 		<div class="current-health"/> *@
@@ -41,7 +41,29 @@
 			<div class="pill"/>
 		</div>
 	</div>
-	<div class="weapons"></div>
+	<div class="weapons">
+		@foreach(GameObject weaponObj in TruckController.Weapons)
+		{
+			var compCheck = weaponObj.GetComponents<scraprunners.TruckWeapon>();
+			if (!compCheck.Any()) return;
+			var weapon = compCheck.First();
+
+			<div class="weapon">
+				<span>@weapon.Name</span>
+				@* <span class="cooldown" style="transition-duration: @GetWeaponFireRate(weapon); @GetWeaponFiringState(weapon)"/> *@
+				<span class="cooldown" style="@GetWeaponFiringState(weapon)"/>
+			</div>
+			@* <div class="weapon">
+				<span>Cannon</span>
+			</div>
+			<div class="weapon">
+				<span>Cannon</span>
+			</div>
+			<div class="weapon">
+				<span>Cannon</span>
+			</div> *@
+		}
+	</div>
 	<div class="speed">Speed: @GetCurrentSpeed() MPH</div>
 	<div class="turn">
 		<span class="point" style="left: 50%" />
@@ -76,11 +98,38 @@
 		return $"{start + max * percentage}%";
 	}
 
+	protected string GetWeaponFiringState(scraprunners.TruckWeapon weapon)
+	{
+		Log.Info($"Getting Firing State: {weapon.Waiting}");
+		if (weapon.Waiting)
+		{
+			return $"height: 0%; transition: height {weapon.FireRate - 0.1f}s; display: flex";
+		} 
+		else
+		{
+			return "height: 100%; transition: height 0s; display: none";
+		}
+	}
+
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine($"{TruckController.CurrentSpeed} {TruckController.TurnDirection} {TruckController.MaxHealth} {TruckController.Health}");
+		var weapons = "";
+		foreach(GameObject weaponObj in TruckController.Weapons)
+		{
+			var compCheck = weaponObj.GetComponents<scraprunners.TruckWeapon>();
+			@* if (!compCheck.Any()) return; *@
+			var weapon = compCheck.First();
+
+			weapons += $"{weapon.Waiting}";
+
+		}
+		var currentSpeed = MathX.AlmostEqual(TruckController.CurrentSpeed, 0, 0.1f) ? 0 : TruckController.CurrentSpeed;
+		var combination = $"{currentSpeed} {TruckController.TurnDirection} {TruckController.MaxHealth} {TruckController.Health} {TruckController.Weapons} {weapons}";
+		@* Log.Info(combination); *@
+		return System.HashCode.Combine(combination);
+		@* return System.HashCode.Combine($"{Time.Now}"); *@
 	}
 }
