@@ -22,12 +22,12 @@ public class TruckController : Component, IPressable
 	[Property, Feature( "References" )] public GameObject FirstPersonCam;
 	[Property, Feature( "References" )] public GameObject ExitPosition;
 	[Property, Feature( "References" )] public List<GameObject> Weapons;
-	[Property, Feature( "References" )] public PanelComponent Hud;
+	[Property, Feature( "References" )] public TruckHud Hud;
 
-	private float currentSpeed = 0f;
+	public float CurrentSpeed = 0f;
 	private Vector3 Velocity = Vector3.Zero;
 
-	private float TurnDirection = 0f;
+	public float TurnDirection = 0f;
 
 
 	public bool Waiting = false;
@@ -66,7 +66,7 @@ public class TruckController : Component, IPressable
 			PositionTruck();
 			PositionWeapons();
 
-			AddDebugOverlays();
+			// AddDebugOverlays();
 		}
 
 		// Do nothing without a driver!
@@ -88,8 +88,8 @@ public class TruckController : Component, IPressable
 			+ FirstPersonCam.WorldRotation.Forward * 100
 			+ FirstPersonCam.WorldRotation.Right * 30
 			+ FirstPersonCam.WorldRotation.Down * 20;
-		DebugOverlay.Text( thirdPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
-		DebugOverlay.Text( firstPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
+		DebugOverlay.Text( thirdPersonDebugPos, $"Speed: {CurrentSpeed:F2} u/s" );
+		DebugOverlay.Text( firstPersonDebugPos, $"Speed: {CurrentSpeed:F2} u/s" );
 
 		thirdPersonDebugPos = thirdPersonDebugPos + WorldRotation.Forward * 200;
 		DebugOverlay.Line( thirdPersonDebugPos + WorldRotation.Left * TurnSpeed, thirdPersonDebugPos + WorldRotation.Right * TurnSpeed, Color.White );
@@ -203,11 +203,11 @@ public class TruckController : Component, IPressable
 
 	public void PositionTruck()
 	{
-		DebugLog($"{TurnDirection}");
+		// DebugLog($"{TurnDirection}");
 
 		// Get inputs from AnalogMove for controller support.
 		var forwardInput = Input.AnalogMove.x;
-		var turnInput = (currentSpeed >= 0) ? Input.AnalogMove.y : Input.AnalogMove.y * -1; // Invert turning when going backwards.  
+		var turnInput = (CurrentSpeed >= 0) ? Input.AnalogMove.y : Input.AnalogMove.y * -1; // Invert turning when going backwards.  
 
 		// Calculate the "turn direction", a moving scale of how hard the player is turning left or right.
 		TurnDirection = Math.Clamp( TurnDirection + turnInput * TurnHandling, -1 * TurnSpeed, TurnSpeed ); // Invert turning when going backwards.
@@ -219,24 +219,24 @@ public class TruckController : Component, IPressable
 		// Slowly decelerate based on drag otherwise.
 		if ( forwardInput != 0 )
 		{
-			currentSpeed += forwardInput * EnginePower * Time.Delta;
+			CurrentSpeed += forwardInput * EnginePower * Time.Delta;
 		}
 		else
 		{
 			// Natural deceleration due to drag and friction
-			currentSpeed *= Drag;
+			CurrentSpeed *= Drag;
 		}
 
 		// Clamp simulated speed to maximum value.
-		currentSpeed = currentSpeed.Clamp( -MaxSpeed, MaxSpeed );
+		CurrentSpeed = CurrentSpeed.Clamp( -MaxSpeed, MaxSpeed );
 
 		// Update velocity/position based on current speed.
-		Velocity = WorldRotation.Forward * currentSpeed;
+		Velocity = WorldRotation.Forward * CurrentSpeed;
 		Velocity *= Friction; // Road friction
 		WorldPosition += Velocity * Time.Delta;
 
 		// Now simulate turning. Don't allow turning while stationary (under 10.0 speed)
-		if ( Math.Abs( currentSpeed ) > 10f )
+		if ( Math.Abs( CurrentSpeed ) > 10f )
 		{
 			var turnAngle = TurnDirection * Time.Delta;
 
@@ -251,7 +251,7 @@ public class TruckController : Component, IPressable
 		// Simulate braking.
 		if ( Input.Down( "jump" ) ) // Example: Space for braking
 		{
-			currentSpeed = MathX.Lerp( currentSpeed, 0, BrakeForce * Time.Delta );
+			CurrentSpeed = MathX.Lerp( CurrentSpeed, 0, BrakeForce * Time.Delta );
 		}
 
 		// Simulate turn direction always leveling out back to zero like real steering.

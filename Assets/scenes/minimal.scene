@@ -948,13 +948,19 @@
           "__type": "Sandbox.TruckHud",
           "__guid": "4b6f1e9b-d1e4-45ae-8fee-22bd56777d1a",
           "__enabled": false,
-          "MyStringValue": "Hello World!",
+          "TruckController": {
+            "_type": "component",
+            "component_id": "c4336a3a-536a-44a4-b1fc-4dfc6d3c7102",
+            "go": "e5899356-e76d-4bc0-a97d-0a647547e152",
+            "component_type": "TruckController"
+          },
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
-          "OnComponentUpdate": null
+          "OnComponentUpdate": null,
+          "SpeedFactor": 0.05
         }
       ]
     }

@@ -1,44 +1,42 @@
 @using Sandbox;
 @using Sandbox.UI;
+@using System;
 @inherits PanelComponent
 @namespace Sandbox
 
-@attribute [StyleSheet("TruckHud.razor.scss")]
 
 <root>
-	<div class="title">@MyStringValue</div>
+	<div class="speed">Speed: @GetCurrentSpeed() MPH</div>
+	<div class="turn">
+		<span class="point" style="left: 50%"/>
+		<span class="point" style="left: @GetTurnDirection()"/>
+		</div>
 </root>
-
-<style>
-	TruckHud
-	{
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #444;
-		justify-content: center;
-		align-items: center;
-		font-weight: bold;
-		border-radius: 20px;
-
-		.title
-		{
-			font-size: 25px;
-			font-family: Poppins;
-			color: #fff;
-		}
-	}
-</style>
 
 @code
 {
 
-	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
+	[Property] public scraprunners.TruckController TruckController;
+	[Property] public float SpeedFactor {get; set; } = 1.0f;
+
+	protected string GetCurrentSpeed()
+	{
+		return $"{(Math.Abs(TruckController.CurrentSpeed) * SpeedFactor):F0}";
+
+	}
+	protected string GetTurnDirection()
+	{
+		double percentage = -1 * (TruckController.TurnDirection / TruckController.TurnSpeed);
+		double start = 50f; // initial left: value
+		double max = 40; // maximum addition to left: value in either direction
+		return $"{50.0f + max * percentage}%";
+	}
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine( MyStringValue );
+	protected override int BuildHash()
+	{
+		return System.HashCode.Combine($"{TruckController.CurrentSpeed} {TruckController.TurnDirection}");
+	}
 }

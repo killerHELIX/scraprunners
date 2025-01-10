@@ -5,16 +5,50 @@ TruckHud
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #444;
+	// background-color: #444;
+	// opacity: 0.5;
+
+
+	// display: flex;
 	justify-content: center;
 	align-items: center;
+
 	font-weight: bold;
 	border-radius: 20px;
 
-	.title
-	{
-		font-size: 25px;
-		font-family: Poppins;
-		color: #fff;
+	.speed {
+		position: absolute;
+		// background-color: red;
+
+		left: 85%;
+		top: 95%;
+
+		font-size: 2rem;
+		margin-right: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.turn {
+		position: absolute;
+		left: 80%;
+		right: 0;
+		top: 92.5%;
+		bottom: 1rem;
+
+		background-color: #333;
+
+		font-size: 2rem;
+		margin-right: 1rem;
+		margin-bottom: 4rem;
+
+		.point {
+			position: absolute;
+			background-color: white;
+			// left: 50%;
+			width: 0.5%;
+			height: 250%;
+			top: -0.25rem;
+			margin-left: -.5rem;
+		}
 	}
 }
