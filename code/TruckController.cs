@@ -16,6 +16,8 @@ public class TruckController : Component, IPressable
 	[Property] public float EnginePower { get; set; } = 100f; // Force applied for acceleration
 	[Property] public float MaxSpeed { get; set; } = 500f; // Maximum speed in units per second
 	[Property] public float TurnSpeed { get; set; } = 100f; // Base degrees per second
+	[Property] public float TurnHandling { get; set; } = 0.05f; // Base degrees per second
+	[Property] public float TurnCentering { get; set; } = 0.05f; // Base degrees per second
 	[Property] public float BrakeForce { get; set; } = 1f; // Braking force
 	[Property] public float Friction { get; set; } = 1f; // Road friction
 	[Property] public float Drag { get; set; } = 0.975f; // Air resistance
@@ -26,7 +28,7 @@ public class TruckController : Component, IPressable
 	private Vector3 velocity = Vector3.Zero;
 	private Vector3 suspensionOffset = Vector3.Zero;
 
-	private float TurnSpeedFactor = 0f;
+	private float TurnDirection = 0f;
 
 
 	public bool Waiting = false;
@@ -57,6 +59,7 @@ public class TruckController : Component, IPressable
 		{
 			if ( !Waiting )
 			{
+				HandleFireInput();
 				HandleUseInput();
 				HandleViewInput();
 			}
@@ -70,6 +73,15 @@ public class TruckController : Component, IPressable
 		// Do nothing without a driver!
 	}
 
+	private void HandleFireInput()
+	{
+		if ( Input.Pressed( "attack1" ) )
+		{
+			DebugLog( "Fire" );
+		}
+	}
+
+
 	private void AddDebugOverlays()
 	{
 		var thirdPersonDebugPos = WorldPosition + Vector3.Up * 100;
@@ -79,6 +91,10 @@ public class TruckController : Component, IPressable
 			+ FirstPersonCam.WorldRotation.Down * 20;
 		DebugOverlay.Text( thirdPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
 		DebugOverlay.Text( firstPersonDebugPos, $"Speed: {currentSpeed:F2} u/s" );
+
+		thirdPersonDebugPos = thirdPersonDebugPos + WorldRotation.Forward * 200;
+		DebugOverlay.Line( thirdPersonDebugPos + WorldRotation.Left * TurnSpeed, thirdPersonDebugPos + WorldRotation.Right * TurnSpeed, Color.White );
+		DebugOverlay.Sphere( new Sphere( thirdPersonDebugPos + WorldRotation.Left * TurnDirection, 2f ) );
 	}
 
 	private void PositionWeapons()
@@ -171,7 +187,7 @@ public class TruckController : Component, IPressable
 		Driver.Enabled = true;
 
 		// Reset Weapons
-		foreach (GameObject weapon in Weapons)
+		foreach ( GameObject weapon in Weapons )
 		{
 			weapon.WorldRotation = WorldRotation;
 		}
@@ -189,8 +205,14 @@ public class TruckController : Component, IPressable
 
 		// Input handling
 		var forwardInput = Input.AnalogMove.x;
-		var turnInput = (currentSpeed >= 0) ? Input.AnalogMove.y : Input.AnalogMove.y * -1; // Invert turning when going backwards.
-		TurnSpeedFactor = (turnInput == 0) ? TurnSpeedFactor : Math.Clamp( TurnSpeedFactor + 0.02f, 0, 1 );
+		var turnInput = (currentSpeed >= 0) ? Input.AnalogMove.y : Input.AnalogMove.y * -1; // Invert turning when going backwards.  
+																							// TurnSpeedFactor = (turnInput == 0) ? TurnSpeedFactor : Math.Clamp( TurnSpeedFactor + 0.02f, 0, 1 );
+																							// turnInput /= 10; // Convert to a number below 1.00.
+		TurnDirection = Math.Clamp( TurnDirection + turnInput * TurnHandling, -1 * TurnSpeed, TurnSpeed ); // Invert turning when going backwards.
+																										   // var turnSpeedFactor = (Math.Abs( currentSpeed ) / MaxSpeed).Clamp( 0.2f, 1f ); // Turn efficiency based on speed (slower at slower speed)
+																										   // TurnDirection *= turnSpeedFactor;
+
+		DebugLog( $"{TurnDirection}" );
 
 		// Acceleration and engine power
 		if ( forwardInput != 0 )
@@ -209,10 +231,16 @@ public class TruckController : Component, IPressable
 		// Only allow turning if moving
 		if ( Math.Abs( currentSpeed ) > 10f )
 		{
-			var turnAngle = turnInput * TurnSpeed * TurnSpeedFactor * Time.Delta;
+			var turnAngle = TurnDirection * Time.Delta;
 
 			WorldRotation *= Rotation.FromYaw( turnAngle );
 			EyeAngles += Rotation.FromYaw( turnAngle ).Angles();
+		}
+		else // not moving
+		{
+
+			TurnDirection = MathX.Lerp(TurnDirection, 0f, 0.3f, true);
+
 		}
 
 		// Simulate suspension
@@ -231,6 +259,17 @@ public class TruckController : Component, IPressable
 		}
 
 		// Always reduce turn input to 0 
-		TurnSpeedFactor = Math.Clamp( TurnSpeedFactor - 0.01f, 0, 1 );
+		if ( TurnDirection > 0 )
+		{
+			// TurnDirection -= TurnCentering * turnSpeedFactor;
+			TurnDirection -= TurnCentering;
+		}
+		else
+		{
+			// TurnDirection += TurnCentering * turnSpeedFactor;
+			TurnDirection += TurnCentering;
+		}
+
+		TurnDirection = MathX.AlmostEqual( TurnDirection, 0, TurnCentering ) ? 0 : TurnDirection; // Soft-lock to zero when close
 	}
 }

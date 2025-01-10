@@ -495,6 +495,8 @@
           "OnComponentUpdate": null,
           "SuspensionDamping": 100,
           "SuspensionStrength": 100,
+          "TurnCentering": 4,
+          "TurnHandling": 10,
           "TurnSpeed": 100
         }
       ],
@@ -647,6 +649,7 @@
           "AimStrengthBody": 1,
           "AimStrengthEyes": 1,
           "AimStrengthHead": 1,
+          "AltMoveButton": "run",
           "Body": {
             "_type": "component",
             "component_id": "cd35efca-1090-4864-a96c-ec5558c6d3af",
@@ -690,6 +693,7 @@
           "RotateWithGround": true,
           "RotationAngleLimit": 45,
           "RotationSpeed": 1,
+          "RunByDefault": false,
           "RunSpeed": 320,
           "ShowColliderComponents": false,
           "ShowRigidbodyComponent": false,
@@ -765,14 +769,17 @@
               "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "c796263b-39bf-41ff-84bc-240749292348",
               "AnimationGraph": null,
-              "BodyGroups": 341,
+              "BodyGroups": 681,
               "BoneMergeTarget": null,
               "CreateAttachments": false,
               "CreateBoneObjects": false,
               "MaterialGroup": null,
               "MaterialOverride": null,
-              "Model": "models/citizen/citizen.vmdl",
-              "Morphs": {},
+              "Model": "models/citizen_human/citizen_human_male.vmdl",
+              "Morphs": {
+                "browDown_L": 0,
+                "browDown_R": 0
+              },
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
