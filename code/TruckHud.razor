@@ -6,18 +6,46 @@
 
 
 <root>
+	@* <div class="ref"></div> *@
+	<div class="health">
+		@* <div class="max-health"/>
+		<div class="current-health"/> *@
+		<div class="max-health">
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+		</div>
+		<div class="current-health" style="width: @GetCurrentHealth()">
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+		</div>
+	</div>
+	<div class="weapons"></div>
 	<div class="speed">Speed: @GetCurrentSpeed() MPH</div>
 	<div class="turn">
-		<span class="point" style="left: 50%"/>
-		<span class="point" style="left: @GetTurnDirection()"/>
-		</div>
+		<span class="point" style="left: 50%" />
+		<span class="point" style="left: @GetTurnDirection()" />
+	</div>
 </root>
 
 @code
 {
 
 	[Property] public scraprunners.TruckController TruckController;
-	[Property] public float SpeedFactor {get; set; } = 1.0f;
+	[Property] public float SpeedFactor { get; set; } = 1.0f;
+	[Property] public float MaxHealthTmp { get; set; } = 100f;
+	[Property] public float CurrentHealthTmp { get; set; } = 50f;
 
 	protected string GetCurrentSpeed()
 	{
@@ -26,10 +54,19 @@
 	}
 	protected string GetTurnDirection()
 	{
-		double percentage = -1 * (TruckController.TurnDirection / TruckController.TurnSpeed);
-		double start = 50f; // initial left: value
-		double max = 40; // maximum addition to left: value in either direction
-		return $"{50.0f + max * percentage}%";
+		float percentage = -1 * (TruckController.TurnDirection / TruckController.TurnSpeed);
+		float start = 50f; // initial left: value
+		float max = 40f; // maximum addition to left: value in either direction
+		return $"{start + max * percentage}%";
+	}
+
+	protected string GetCurrentHealth()
+	{
+		float percentage = CurrentHealthTmp / MaxHealthTmp;
+		float start = 0f;
+		float max = 100f;
+		Log.Info(percentage);
+		return $"{start + max * percentage}%";
 	}
 
 	/// <summary>
@@ -37,6 +74,6 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine($"{TruckController.CurrentSpeed} {TruckController.TurnDirection}");
+		return System.HashCode.Combine($"{TruckController.CurrentSpeed} {TruckController.TurnDirection} {MaxHealthTmp} {CurrentHealthTmp}");
 	}
 }

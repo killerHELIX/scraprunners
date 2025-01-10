@@ -652,6 +652,7 @@
         {
           "__type": "Sandbox.PlayerController",
           "__guid": "f7abd909-5ca0-46c3-8d98-fe94996f2540",
+          "AccelerationTime": 0,
           "AimStrengthBody": 1,
           "AimStrengthEyes": 1,
           "AimStrengthHead": 1,
@@ -671,6 +672,7 @@
             "_type": "gameobject",
             "go": "966d6804-00b7-466f-98b5-1fa88ff56eaf"
           },
+          "DeaccelerationTime": 0,
           "DuckedHeight": 36,
           "DuckedSpeed": 70,
           "EnableFootstepSounds": true,
@@ -954,6 +956,8 @@
             "go": "e5899356-e76d-4bc0-a97d-0a647547e152",
             "component_type": "TruckController"
           },
+          "CurrentHealthTmp": 70,
+          "MaxHealthTmp": 100,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
