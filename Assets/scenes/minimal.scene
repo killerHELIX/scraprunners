@@ -769,13 +769,13 @@
               "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "c796263b-39bf-41ff-84bc-240749292348",
               "AnimationGraph": null,
-              "BodyGroups": 681,
+              "BodyGroups": 18446744073709551615,
               "BoneMergeTarget": null,
               "CreateAttachments": false,
               "CreateBoneObjects": false,
               "MaterialGroup": null,
               "MaterialOverride": null,
-              "Model": "models/citizen_human/citizen_human_male.vmdl",
+              "Model": "models/citizen_human/citizen_human_male_staging.vmdl",
               "Morphs": {
                 "browDown_L": 0,
                 "browDown_R": 0
