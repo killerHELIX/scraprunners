@@ -492,6 +492,8 @@
           "Drag": 0.98,
           "EnginePower": 100,
           "Friction": 1,
+          "Health": 100,
+          "MaxHealth": 100,
           "MaxSpeed": 500,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -499,8 +501,6 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "SuspensionDamping": 100,
-          "SuspensionStrength": 100,
           "TurnCentering": 1.5,
           "TurnHandling": 4,
           "TurnSpeed": 80
@@ -956,8 +956,6 @@
             "go": "e5899356-e76d-4bc0-a97d-0a647547e152",
             "component_type": "TruckController"
           },
-          "CurrentHealthTmp": 70,
-          "MaxHealthTmp": 100,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,

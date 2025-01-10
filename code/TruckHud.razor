@@ -30,6 +30,16 @@
 			<div class="pill"/>
 			<div class="pill"/>
 		</div>
+		<div class="damage" style="width: @GetCurrentHealth()">
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+			<div class="pill"/>
+		</div>
 	</div>
 	<div class="weapons"></div>
 	<div class="speed">Speed: @GetCurrentSpeed() MPH</div>
@@ -44,8 +54,6 @@
 
 	[Property] public scraprunners.TruckController TruckController;
 	[Property] public float SpeedFactor { get; set; } = 1.0f;
-	[Property] public float MaxHealthTmp { get; set; } = 100f;
-	[Property] public float CurrentHealthTmp { get; set; } = 50f;
 
 	protected string GetCurrentSpeed()
 	{
@@ -62,10 +70,9 @@
 
 	protected string GetCurrentHealth()
 	{
-		float percentage = CurrentHealthTmp / MaxHealthTmp;
+		var percentage = TruckController.Health / TruckController.MaxHealth;
 		float start = 0f;
 		float max = 100f;
-		Log.Info(percentage);
 		return $"{start + max * percentage}%";
 	}
 
@@ -74,6 +81,6 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine($"{TruckController.CurrentSpeed} {TruckController.TurnDirection} {MaxHealthTmp} {CurrentHealthTmp}");
+		return System.HashCode.Combine($"{TruckController.CurrentSpeed} {TruckController.TurnDirection} {TruckController.MaxHealth} {TruckController.Health}");
 	}
 }

@@ -76,17 +76,34 @@ TruckHud
 			}
 		}
 
-		.current-health {
+		.current-health, .damage {
 			position: absolute;
-			z-index: 101;
+			z-index: 102;
 			height: 100%;
 
 			overflow: hidden;
 
+			display: flex;
+
+		}
+
+		.current-health {
+			.pill {
+				opacity: 1;
+			}
+
+			transition: width 0.05s;
+		}
+
+		.damage {
+			z-index: 101;
+
 			.pill {
 				opacity: 0.8;
+				background-color: red;
 			}
-			display: flex;
+
+			transition: width 1s;
 		}
 
 		.pill {

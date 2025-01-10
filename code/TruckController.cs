@@ -5,21 +5,22 @@ namespace scraprunners;
 
 public class TruckController : Component, IPressable
 {
-	[Property, Feature( "General" )] public Vector3 ThirdPersonCamOffsets;
+	[Property, Feature( "General" ), Order( 1 )] public Vector3 ThirdPersonCamOffsets;
 	[Property, Feature( "General" )] private bool IsFirstPerson = true;
 
-	[Property, Feature( "Stats" )] public float EnginePower { get; set; } = 100f; // Force applied for acceleration
-	[Property, Feature( "Stats" )] public float MaxSpeed { get; set; } = 500f; // Maximum speed in units per second
-	[Property, Feature( "Stats" )] public float TurnSpeed { get; set; } = 100f; // Base degrees per second
-	[Property, Feature( "Stats" )] public float TurnHandling { get; set; } = 0.05f; // Base degrees per second
-	[Property, Feature( "Stats" )] public float TurnCentering { get; set; } = 0.05f; // Base degrees per second
-	[Property, Feature( "Stats" )] public float BrakeForce { get; set; } = 1f; // Braking force
-	[Property, Feature( "Stats" )] public float Friction { get; set; } = 1f; // Road friction
-	[Property, Feature( "Stats" )] public float Drag { get; set; } = 0.975f; // Air resistance
-	[Property, Feature( "Stats" )] public float SuspensionStrength { get; set; } = 100f; // Suspension strength
-	[Property, Feature( "Stats" )] public float SuspensionDamping { get; set; } = 100f; // Suspension damping
+	[Property, Feature( "Driving" ), Order( 2 )] public float EnginePower { get; set; } = 100f; // Force applied for acceleration
+	[Property, Feature( "Driving" )] public float MaxSpeed { get; set; } = 500f; // Maximum speed in units per second
+	[Property, Feature( "Driving" )] public float TurnSpeed { get; set; } = 100f; // Base degrees per second
+	[Property, Feature( "Driving" )] public float TurnHandling { get; set; } = 0.05f; // Base degrees per second
+	[Property, Feature( "Driving" )] public float TurnCentering { get; set; } = 0.05f; // Base degrees per second
+	[Property, Feature( "Driving" )] public float BrakeForce { get; set; } = 1f; // Braking force
+	[Property, Feature( "Driving" )] public float Friction { get; set; } = 1f; // Road friction
+	[Property, Feature( "Driving" )] public float Drag { get; set; } = 0.975f; // Air resistance
 
-	[Property, Feature( "References" )] public GameObject FirstPersonCam;
+	[Property, Feature( "Stats" ), Order( 3 )] public float MaxHealth { get; set; } = 100f; // Maximum health
+	[Property, Feature( "Stats" )] public float Health { get; set; } = 100f; // Current health
+
+	[Property, Feature( "References" ), Order( 4 )] public GameObject FirstPersonCam;
 	[Property, Feature( "References" )] public GameObject ExitPosition;
 	[Property, Feature( "References" )] public List<GameObject> Weapons;
 	[Property, Feature( "References" )] public TruckHud Hud;
@@ -61,6 +62,7 @@ public class TruckController : Component, IPressable
 				HandleFireInput();
 				HandleUseInput();
 				HandleViewInput();
+				HandleDebugInput();
 			}
 
 			PositionTruck();
@@ -72,6 +74,19 @@ public class TruckController : Component, IPressable
 		// Do nothing without a driver!
 	}
 
+	private void HandleDebugInput()
+	{
+		if (Input.Pressed("duck"))
+		{
+			DealDamage(15);
+		}
+
+		if (Input.Down("jump"))
+		{
+			Heal(2);
+		}
+	}
+
 	private void HandleFireInput()
 	{
 		if ( Input.Pressed( "attack1" ) )
@@ -80,20 +95,14 @@ public class TruckController : Component, IPressable
 		}
 	}
 
-
-	private void AddDebugOverlays()
+	public void DealDamage(float dmg)
 	{
-		var thirdPersonDebugPos = WorldPosition + Vector3.Up * 100;
-		var firstPersonDebugPos = FirstPersonCam.WorldPosition
-			+ FirstPersonCam.WorldRotation.Forward * 100
-			+ FirstPersonCam.WorldRotation.Right * 30
-			+ FirstPersonCam.WorldRotation.Down * 20;
-		DebugOverlay.Text( thirdPersonDebugPos, $"Speed: {CurrentSpeed:F2} u/s" );
-		DebugOverlay.Text( firstPersonDebugPos, $"Speed: {CurrentSpeed:F2} u/s" );
+		Health = Math.Clamp(Health - dmg, 0, MaxHealth);
+	}
 
-		thirdPersonDebugPos = thirdPersonDebugPos + WorldRotation.Forward * 200;
-		DebugOverlay.Line( thirdPersonDebugPos + WorldRotation.Left * TurnSpeed, thirdPersonDebugPos + WorldRotation.Right * TurnSpeed, Color.White );
-		DebugOverlay.Sphere( new Sphere( thirdPersonDebugPos + WorldRotation.Left * TurnDirection, 2f ) );
+	public void Heal(float heal)
+	{
+		Health = Math.Clamp(Health + heal, 0, MaxHealth);
 	}
 
 	private void PositionWeapons()
@@ -258,7 +267,7 @@ public class TruckController : Component, IPressable
 
 		// If the turn centering overshoots 0 then it will infinitely bounce between the lowest non-zero left/right turn direction value.
 		// If this is detected, just clamp the value to 0 and be done with it.
-		if (turnInput == 0) // Not actively turning left/right
+		if ( turnInput == 0 ) // Not actively turning left/right
 		{
 			if ( TurnDirection > 0 ) // Turning Left
 			{
