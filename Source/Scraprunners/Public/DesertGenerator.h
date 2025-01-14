@@ -27,6 +27,12 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UProceduralMeshComponent* Mesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
+	int32 Seed = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
+	float ScalarForPerlinVector2 = 0.05f;
+
 	// Parameters
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
 	int32 Width = 512;
@@ -42,6 +48,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
 	float NoiseFrequency = 0.01f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Materials")
+	float TilingFactor = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Materials")
+	UMaterialInterface* SandMaterial;
 
 	void GenerateDesert();
 };
