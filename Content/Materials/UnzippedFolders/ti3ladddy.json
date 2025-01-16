@@ -1,0 +1,576 @@
+{
+  "assetCategories": {
+    "surface": {
+      "soil": {
+        "mud": {}
+      }
+    }
+  },
+  "averageColor": "#000000",
+  "categories": [
+    "surface",
+    "soil",
+    "mud"
+  ],
+  "comp_version": 1,
+  "description": "",
+  "displacementBias": 0.618605,
+  "displacementCalibrationAccuracy": 0.976476,
+  "displacementScale": 15.011894,
+  "environment": {
+    "biome": "undefined",
+    "region": "Asia"
+  },
+  "highest_available_res": 8192,
+  "id": "ti3ladddy",
+  "json": {
+    "contentLength": 12301,
+    "uri": "ti3ladddy.json"
+  },
+  "maps": [
+    {
+      "averageColor": "#F1F1F1",
+      "bitDepth": 32,
+      "colorSpace": "sRGB",
+      "contentLength": 172235745,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 166,
+      "name": "AO",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "ao",
+      "uri": "ti3ladddy_8K_AO.exr"
+    },
+    {
+      "averageColor": "#F1F1F1",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 20740712,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 166,
+      "name": "AO",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "ao",
+      "uri": "ti3ladddy_8K_AO.jpg"
+    },
+    {
+      "averageColor": "#7B614D",
+      "bitDepth": 16,
+      "colorSpace": "sRGB",
+      "contentLength": 647098185,
+      "maxIntensity": 125,
+      "mimeType": "image/x-exr",
+      "minIntensity": 76,
+      "name": "Basecolor",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "basecolor",
+      "uri": "ti3ladddy_8K_Basecolor.exr"
+    },
+    {
+      "averageColor": "#7B614D",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 41999108,
+      "maxIntensity": 125,
+      "mimeType": "image/jpeg",
+      "minIntensity": 76,
+      "name": "Basecolor",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "basecolor",
+      "uri": "ti3ladddy_8K_Basecolor.jpg"
+    },
+    {
+      "averageColor": "#808080",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 189313915,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 0,
+      "name": "Bump",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "bump",
+      "uri": "ti3ladddy_8K_Bump.exr"
+    },
+    {
+      "averageColor": "#808080",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 11352236,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 0,
+      "name": "Bump",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "bump",
+      "uri": "ti3ladddy_8K_Bump.jpg"
+    },
+    {
+      "averageColor": "#FFFFFF",
+      "bitDepth": 32,
+      "colorSpace": "sRGB",
+      "contentLength": 199413712,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 255,
+      "name": "Cavity",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "cavity",
+      "uri": "ti3ladddy_8K_Cavity.exr"
+    },
+    {
+      "averageColor": "#FFFFFF",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 34438753,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 255,
+      "name": "Cavity",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "cavity",
+      "uri": "ti3ladddy_8K_Cavity.jpg"
+    },
+    {
+      "averageColor": "#6D6D6D",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 252354360,
+      "maxIntensity": 117,
+      "mimeType": "image/x-exr",
+      "minIntensity": 100,
+      "name": "Displacement",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "displacement",
+      "uri": "ti3ladddy_8K_Displacement.exr"
+    },
+    {
+      "averageColor": "#6D6D6D",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 3257403,
+      "maxIntensity": 117,
+      "mimeType": "image/jpeg",
+      "minIntensity": 100,
+      "name": "Displacement",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "displacement",
+      "uri": "ti3ladddy_8K_Displacement.jpg"
+    },
+    {
+      "averageColor": "#363636",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 213824219,
+      "maxIntensity": 66,
+      "mimeType": "image/x-exr",
+      "minIntensity": 39,
+      "name": "Gloss",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "gloss",
+      "uri": "ti3ladddy_8K_Gloss.exr"
+    },
+    {
+      "averageColor": "#363636",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 23128055,
+      "maxIntensity": 66,
+      "mimeType": "image/jpeg",
+      "minIntensity": 39,
+      "name": "Gloss",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "gloss",
+      "uri": "ti3ladddy_8K_Gloss.jpg"
+    },
+    {
+      "averageColor": "#8186F7",
+      "bitDepth": 16,
+      "colorSpace": "Linear",
+      "contentLength": 601847464,
+      "maxIntensity": 199,
+      "mimeType": "image/x-exr",
+      "minIntensity": 90,
+      "name": "Normal",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "normal",
+      "uri": "ti3ladddy_8K_Normal.exr"
+    },
+    {
+      "averageColor": "#8186F7",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 50672657,
+      "maxIntensity": 199,
+      "mimeType": "image/jpeg",
+      "minIntensity": 90,
+      "name": "Normal",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "normal",
+      "uri": "ti3ladddy_8K_Normal.jpg"
+    },
+    {
+      "averageColor": "#C9C9C9",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 197484307,
+      "maxIntensity": 216,
+      "mimeType": "image/x-exr",
+      "minIntensity": 189,
+      "name": "Roughness",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "roughness",
+      "uri": "ti3ladddy_8K_Roughness.exr"
+    },
+    {
+      "averageColor": "#C9C9C9",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 21956758,
+      "maxIntensity": 216,
+      "mimeType": "image/jpeg",
+      "minIntensity": 189,
+      "name": "Roughness",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "roughness",
+      "uri": "ti3ladddy_8K_Roughness.jpg"
+    },
+    {
+      "averageColor": "#383838",
+      "bitDepth": 16,
+      "colorSpace": "sRGB",
+      "contentLength": 585043441,
+      "maxIntensity": 56,
+      "mimeType": "image/x-exr",
+      "minIntensity": 56,
+      "name": "Specular",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "specular",
+      "uri": "ti3ladddy_8K_Specular.exr"
+    },
+    {
+      "averageColor": "#383838",
+      "bitDepth": 8,
+      "colorSpace": "sRGB",
+      "contentLength": 19505631,
+      "maxIntensity": 56,
+      "mimeType": "image/jpeg",
+      "minIntensity": 56,
+      "name": "Specular",
+      "physicalSize": "2x2",
+      "resolution": "8192x8192",
+      "type": "specular",
+      "uri": "ti3ladddy_8K_Specular.jpg"
+    }
+  ],
+  "meta": [
+    {
+      "key": "scanArea",
+      "name": "Scan Area",
+      "value": "2x2 m"
+    },
+    {
+      "key": "height",
+      "name": "Height",
+      "value": "0.013 m"
+    },
+    {
+      "key": "tileable",
+      "name": "Tileable",
+      "value": true
+    },
+    {
+      "key": "texelDensity",
+      "name": "Texel Density",
+      "value": "4096 px/m"
+    },
+    {
+      "key": "calibration",
+      "name": "Calibration",
+      "value": "GretagMacbeth ColorChecker Color Rendition Chart"
+    },
+    {
+      "key": "scanner",
+      "name": "Scanner",
+      "value": "MKX"
+    }
+  ],
+  "models": [],
+  "name": "Cracked Mud Floor",
+  "pack": {
+    "_id": "medieval-village",
+    "name": "Medieval Village"
+  },
+  "physicalSize": null,
+  "points": 2,
+  "previews": {
+    "images": [
+      {
+        "contentLength": 260166,
+        "resolution": "360x360",
+        "tags": [
+          "thumb"
+        ],
+        "uri": "ti3ladddy_Grid_360.png"
+      },
+      {
+        "contentLength": 352860,
+        "resolution": "420x420",
+        "tags": [
+          "thumb"
+        ],
+        "uri": "ti3ladddy_Grid_420.png"
+      },
+      {
+        "contentLength": 1052854,
+        "resolution": "720x720",
+        "tags": [
+          "thumb",
+          "retina"
+        ],
+        "uri": "ti3ladddy_Grid_720.png"
+      },
+      {
+        "contentLength": 1439237,
+        "resolution": "840x840",
+        "tags": [
+          "thumb",
+          "retina"
+        ],
+        "uri": "ti3ladddy_Grid_840.png"
+      },
+      {
+        "contentLength": 2940174,
+        "resolution": "1440x768",
+        "tags": [
+          "preview",
+          "clay"
+        ],
+        "uri": "ti3ladddy_PopupClay_1440.png"
+      },
+      {
+        "contentLength": 5514487,
+        "resolution": "1920x1080",
+        "tags": [
+          "preview",
+          "clay"
+        ],
+        "uri": "ti3ladddy_PopupClay_1920.png"
+      },
+      {
+        "contentLength": 11758136,
+        "resolution": "2880x1536",
+        "tags": [
+          "preview",
+          "clay",
+          "retina"
+        ],
+        "uri": "ti3ladddy_PopupClay_2880.png"
+      },
+      {
+        "contentLength": 22414327,
+        "resolution": "3840x2160",
+        "tags": [
+          "preview",
+          "clay",
+          "retina"
+        ],
+        "uri": "ti3ladddy_PopupClay_3840.png"
+      },
+      {
+        "contentLength": 3225927,
+        "resolution": "1440x768",
+        "tags": [
+          "preview",
+          "tiled"
+        ],
+        "uri": "ti3ladddy_PopupTiled_1440.png"
+      },
+      {
+        "contentLength": 6064535,
+        "resolution": "1920x1080",
+        "tags": [
+          "preview",
+          "tiled"
+        ],
+        "uri": "ti3ladddy_PopupTiled_1920.png"
+      },
+      {
+        "contentLength": 13007310,
+        "resolution": "2880x1536",
+        "tags": [
+          "preview",
+          "tiled",
+          "retina"
+        ],
+        "uri": "ti3ladddy_PopupTiled_2880.png"
+      },
+      {
+        "contentLength": 24807030,
+        "resolution": "3840x2160",
+        "tags": [
+          "preview",
+          "tiled",
+          "retina"
+        ],
+        "uri": "ti3ladddy_PopupTiled_3840.png"
+      },
+      {
+        "contentLength": 3270627,
+        "resolution": "1440x768",
+        "tags": [
+          "preview"
+        ],
+        "uri": "ti3ladddy_Popup_1440.png"
+      },
+      {
+        "contentLength": 6130667,
+        "resolution": "1920x1080",
+        "tags": [
+          "preview"
+        ],
+        "uri": "ti3ladddy_Popup_1920.png"
+      },
+      {
+        "contentLength": 13085800,
+        "resolution": "2880x1536",
+        "tags": [
+          "preview",
+          "retina"
+        ],
+        "uri": "ti3ladddy_Popup_2880.png"
+      },
+      {
+        "contentLength": 24916887,
+        "resolution": "3840x2160",
+        "tags": [
+          "preview",
+          "retina"
+        ],
+        "uri": "ti3ladddy_Popup_3840.png"
+      }
+    ],
+    "relativeSize": "1x1",
+    "scaleReferences": []
+  },
+  "process_date": "2024-04-17 09:16:36",
+  "properties": [],
+  "referencePreviews": {
+    "maps": [],
+    "models": []
+  },
+  "references": [],
+  "revised": false,
+  "revision": 0,
+  "semanticTags": {
+    "3d_mesh": [],
+    "architectural_style": {},
+    "asset_type": "surface",
+    "color": [
+      "brown"
+    ],
+    "contains": [
+      "wall",
+      "mud wall",
+      "cracks"
+    ],
+    "descriptive": [
+      "rough",
+      " cracked",
+      " caked"
+    ],
+    "environment": [
+      "rural"
+    ],
+    "industry": [
+      "archviz",
+      "games",
+      "VFX"
+    ],
+    "interior_exterior": [
+      "exterior",
+      "interior"
+    ],
+    "latin_name": [],
+    "locations": {},
+    "maxSize": 2,
+    "minSize": 2,
+    "name": "Cracked Mud Floor",
+    "orientation": [
+      "floor"
+    ],
+    "resolution": 8192,
+    "season": [],
+    "state": [
+      "damaged"
+    ],
+    "subject_matter": "manmade",
+    "theme": [
+      "village",
+      " kiln",
+      " wall"
+    ]
+  },
+  "tags": [
+    "surface",
+    "brown",
+    "rough",
+    "archviz",
+    "kahuta"
+  ],
+  "texelDensity": 4096,
+  "texture_type": "basic",
+  "ue_plugin_archives": [
+    {
+      "contentLength": 242338819,
+      "gltfVersion": "2.0",
+      "tier": 0,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_0/ti3ladddy_tier_0.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 81143770,
+      "gltfVersion": "2.0",
+      "tier": 1,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_1/ti3ladddy_tier_1.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 22252630,
+      "gltfVersion": "2.0",
+      "tier": 2,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_2/ti3ladddy_tier_2.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 1909397,
+      "gltfVersion": "2.0",
+      "tier": 3,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_3/ti3ladddy_tier_3.zip",
+      "version": 1
+    }
+  ],
+  "version": 2
+}
