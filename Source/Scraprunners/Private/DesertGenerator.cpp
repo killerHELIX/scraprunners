@@ -3,6 +3,7 @@
 
 #include "DesertGenerator.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "FastNoiseLite.h"
 
 // Sets default values
@@ -21,10 +22,21 @@ void ADesertGenerator::BeginPlay()
 	Super::BeginPlay();
 	
 	Seed = FMath::Rand();
-	GenerateDesert();
+	LastPlayerPosition = FVector::ZeroVector;
 
 	if (SandMaterial) {
 		Mesh->SetMaterial(0, SandMaterial);
+	}
+
+	for (int X = 0; X < GridSize; X++)
+	{
+		for (int Y = 0; Y < GridSize; Y++)
+		{
+			FVector ChunkCenter = FVector(X * ChunkSize * Scale, Y * ChunkSize * Scale, 0);
+			int32 InitialLOD = 2;
+			ChunkLODMap.Add(ChunkCenter, InitialLOD);
+			GenerateChunk(ChunkCenter, InitialLOD);
+		}
 	}
 }
 
@@ -32,10 +44,26 @@ void ADesertGenerator::BeginPlay()
 void ADesertGenerator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	//Get player position
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (PlayerController)
+	{
+		APawn* PlayerPawn = PlayerController->GetPawn();
+		if (PlayerPawn)
+		{
+			FVector PlayerPosition = PlayerPawn->GetActorLocation();
 
+			if (FVector::Dist(PlayerPosition, LastPlayerPosition) > ChunkSize)
+			{
+				UpdateLOD(PlayerPosition);
+				LastPlayerPosition = PlayerPosition;
+			}
+		}
+	}
 }
 
-void ADesertGenerator::GenerateDesert()
+void ADesertGenerator::GenerateChunk(FVector ChunkCenter, int32 LODLevel)
 {
 	//Clear previous meshes
 	Mesh->ClearAllMeshSections();
@@ -43,6 +71,8 @@ void ADesertGenerator::GenerateDesert()
 	FastNoiseLite Noise;
 	Noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
 	Noise.SetSeed(Seed);
+
+	int32 Resolution = ChunkSize / pow(2, LODLevel);
 
 	FRandomStream RandomStream(Seed);
 	TArray<FVector> Vertices;
@@ -53,20 +83,18 @@ void ADesertGenerator::GenerateDesert()
 	TArray<FColor> VertexColors;
 
 	// make grid
-	for (int32 x = 0; x <= Width; x++)
+	for (int32 x = 0; x <= Resolution; x++)
 	{
-		for (int32 y = 0; y <= Length; y++)
+		for (int32 y = 0; y <= Resolution; y++)
 		{
-			// + 0.05f * FVector2D(RandomStream.FRand(), RandomStream.FRand()))
-			//float Height = FMath::PerlinNoise2D(FVector2D(x, y) * NoiseFrequency + ScalarForPerlinVector2 * FVector2D(RandomStream.FRand(), RandomStream.FRand())) * HeightMultiplier;
 			float Height = Noise.GetNoise((float)x, (float)y) * HeightMultiplier;
-			Vertices.Add(FVector(x * Scale, y * Scale, Height));
+			Vertices.Add(FVector(x * Scale, y * Scale, Height) + ChunkCenter);
 			Normals.Add(FVector(0, 0, 1));
-			UVs.Add(FVector2D((float)x / Width * TilingFactor, (float)y / Length * TilingFactor));
+			UVs.Add(FVector2D((float)x / Width * TilingFactor / Resolution, (float)y / Length * TilingFactor / Resolution));
 
-			int32 BottomLeft = x * (Length + 1) + y;
+			int32 BottomLeft = x * (Resolution + 1) + y;
 			int32 BottomRight = BottomLeft + 1;
-			int32 TopLeft = BottomLeft + (Length + 1);
+			int32 TopLeft = BottomLeft + (Resolution + 1);
 			int32 TopRight = TopLeft + 1;
 			
 			if (y < Length && x < Width)
@@ -95,3 +123,31 @@ void ADesertGenerator::GenerateDesert()
 	Mesh->ContainsPhysicsTriMeshData(true);
 }
 
+void ADesertGenerator::UpdateLOD(FVector PlayerPosition)
+{
+	for (auto& Entry : ChunkLODMap)
+	{
+		FVector ChunkCenter = Entry.Key;
+		float Distance = FVector::Dist(PlayerPosition, ChunkCenter);
+
+		int32 NewLODLevel = 0;
+		if (Distance < LOD0Distance)
+		{
+			NewLODLevel = 0;
+		}
+		else if (Distance < LOD1Distance)
+		{
+			NewLODLevel = 1;
+		}
+		else
+		{
+			NewLODLevel = 2;
+		}
+
+		if (Entry.Value != NewLODLevel)
+		{
+			Entry.Value = NewLODLevel;
+			GenerateChunk(ChunkCenter, NewLODLevel);
+		}
+	}
+}

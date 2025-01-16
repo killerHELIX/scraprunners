@@ -34,6 +34,13 @@ public:
 	float ScalarForPerlinVector2 = 0.05f;
 
 	// Parameters
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
+	int32 GridSize = 16;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
+	int32 ChunkSize = 32;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
 	int32 Width = 512;
 
@@ -49,11 +56,25 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
 	float NoiseFrequency = 0.01f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
+	float LOD0Distance = 1000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
+	float LOD1Distance = 3000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Desert Terrain")
+	float LOD2Distance = 5000.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Materials")
 	float TilingFactor = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Materials")
 	UMaterialInterface* SandMaterial;
 
-	void GenerateDesert();
+	void GenerateChunk(FVector ChunkCenter, int32 LODLevel);
+	void UpdateLOD(FVector PlayerPosition);
+
+private:
+	TMap<FVector, int32> ChunkLODMap;
+	FVector LastPlayerPosition;
 };
