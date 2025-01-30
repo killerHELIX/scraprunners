@@ -36,4 +36,5 @@ public:
 	float ScalarForNoise;
 
 	TArray<FVector2D> VertexPositions;
+	TArray<FVector2D> GeneratePositionsForVertices();
 };

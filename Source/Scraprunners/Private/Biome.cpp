@@ -5,5 +5,9 @@
 
 UBiome::UBiome()
 {
-
+	TArray<FVector2D> VertexPositions;
+	TArray<FVector2D> GeneratePositionsForVertices()
+	{
+		return VertexPositions;
+	}
 }
