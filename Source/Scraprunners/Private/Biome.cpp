@@ -3,11 +3,15 @@
 
 #include "Biome.h"
 
-UBiome::UBiome()
+Biome::Biome()
 {
-	TArray<FVector2D> VertexPositions;
-	TArray<FVector2D> GeneratePositionsForVertices()
-	{
-		return VertexPositions;
-	}
+}
+
+Biome::~Biome()
+{
+}
+
+void Biome::GenerateTerrainData(TArray<FVector>& OutVertexPositions, TArray<FVector>& OutNormals, TArray<FVector2D>& OutUVs, TArray<int32>& OutIndices)
+{
+
 }
